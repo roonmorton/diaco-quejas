@@ -62,7 +62,7 @@
                 <div class="field">
                     <label class="label">Correo</label>
                     <div class="control has-icons-left has-icons-right">
-                        <input class="input " type="email" placeholder="Ingresar correo" value="" required autofocus>
+                        <input class="input " type="email" placeholder="Ingresar correo" value="" required autofocus />
                         <span class="icon is-small is-left">
                             <i class="fas fa-envelope"></i>
                         </span>
@@ -72,7 +72,7 @@
                 <div class="field">
                     <label class="label">Contraseña</label>
                     <div class="control has-icons-left has-icons-right">
-                        <input class="input " type="password" placeholder="*****" value="">
+                        <input class="input " type="password" placeholder="*****" value=""/>
                         <span class="icon is-small is-left">
                             <i class="fas fa-key"></i>
                         </span>
