@@ -78,7 +78,7 @@
                         </span>
                     </div>
                 </div>
-                <br>
+                <br/>
                 <input type="button" class="button is-danger is-fullwidth" value="Iniciar" />
 
             </div>
