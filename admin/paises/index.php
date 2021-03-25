@@ -85,7 +85,6 @@ if(isset($_POST)){
 
                             <?php if(isset($listaPaises) && count($listaPaises) >  0   ){ ?>
                             <?php $index = 1; foreach($listaPaises as $value){ ?>
-
                             <tr>
                                 <th>
                                     <?php echo $index; ?>
