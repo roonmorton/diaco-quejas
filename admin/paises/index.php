@@ -3,7 +3,6 @@ $path = 'paisIndex';
 require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Pais.php');
 
 
-/* $listaPaises = $pais->list(); */
 
 if(isset($_POST)){
    if (isset($_POST["del"]) && $_POST["del"] == "1"){
@@ -11,31 +10,39 @@ if(isset($_POST)){
   			$pais->id = $_POST["pID"];
   			if($pais->delete()){
                 echo "eliminado";
-                $pais = new Pais();
-                $listaPaises = $pais->list();
-                var_dump($listaPaises);
+                if (isset($_GET["busqueda"]) && $_GET["busqueda"] != ""){ 
+                    $busqueda = $_GET['busqueda'];
+                }else{
+                    $listaPaises = $pais->list();
+                }
                 echo '<script>alert("Contacto eliminado Correctamente...");window.location.href = ""; </script>';
               }
 	}else {
-    $pais = new Pais();
-    $listaPaises = $pais->list();
+        $pais = new Pais();
+        if (isset($_GET["busqueda"]) && $_GET["busqueda"] != ""){ 
+            $busqueda = $_GET['busqueda'];
+            $listaPaises = $pais->busqueda( $busqueda);
+        }else{
+            $listaPaises = $pais->list();
+        }
+
     }
+
 }else{
     $pais = new Pais();
     $listaPaises = $pais->list();
-}
-
+}  
 ?>
 
 <!DOCTYPE html>
-<html lang="en" style="height: 100%;">
+<html lang="es" style="height: 100%;">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Diaco - Admin</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" />
@@ -68,6 +75,23 @@ if(isset($_POST)){
                             <span>Agregar</span>
                         </a>
                     </div>
+                </div>
+
+
+                <div class="">
+                    <form action="" method="GET" style="padding: 1em 0;">
+                        <div class="field">
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input " type="text" placeholder="Ingresar terminos de busqueda" autofocus
+                                    name="busqueda" value="<?php echo isset($busqueda) ? $busqueda : ''; ?>" />
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+
+
                 </div>
                 <div class="box">
                     <table class="table is-striped is-hoverable is-fullwidth">
@@ -105,19 +129,20 @@ if(isset($_POST)){
                                     <div class="buttons are-small">
 
                                         <form method="POST" action="" style="padding-right: .2em; margin-bottom: 0">
-                                            <input type="hidden" name="pID" value="<?php echo $value['idPais']; ?>">
-                                            <input type="hidden" name="del" value="1">
+                                            <input type="hidden" name="pID" value="<?php echo $value['idPais']; ?>" />
+                                            <input type="hidden" name="del" value="1" />
                                             <button class="button is-danger is-outlined" title="Eliminar" type="submit"
                                                 onclick="return confirm('Esta seguro de eliminar el registro?');">
                                                 <span class="icon is-small ">
                                                     <i class="fas fa-trash"></i>
-                                                </span></button>
+                                                </span>
+                                            </button>
                                         </form>
 
                                         <form method="POST" action="crear.php"
                                             style="padding-right: .2em; margin-bottom: 0">
-                                            <input type="hidden" name="pID" value="<?php echo $value['idPais']; ?>">
-                                            <input class="input" type="hidden" name="edit" value="1">
+                                            <input type="hidden" name="pID" value="<?php echo $value['idPais']; ?>" />
+                                            <input class="input" type="hidden" name="edit" value="1" />
                                             <button class="button is-link is-outlined" title="Actualizar">
                                                 <span class="icon is-small">
                                                     <i class="fas fa-edit"></i>
@@ -140,7 +165,7 @@ if(isset($_POST)){
             </div>
         </div>
     </div>
-    <script src="./recursos/js/funciones.js"></script>
+    <script src="/diaco-quejas/admin/recursos/js/funciones.js"></script>
 </body>
 
 </html>

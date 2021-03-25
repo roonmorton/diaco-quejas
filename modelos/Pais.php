@@ -50,7 +50,11 @@ class Pais {
 	public function list(){
 		$query = 'SELECT * FROM Pais ORDER BY idPais DESC';
 		return $this->db->queryResult($query);
+	}
 
+	public function busqueda($q){
+		$query = "SELECT * FROM Pais WHERE UPPER(nombre) LIKE UPPER('%$q%') ORDER BY idPais DESC";
+		return $this->db->queryResult($query);
 	}
 
 	public function find(){
