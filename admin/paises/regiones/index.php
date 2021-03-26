@@ -4,28 +4,37 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Pais.php');
 
 
 
-if(isset($_POST)){
-   if (isset($_POST["del"]) && $_POST["del"] == "1"){
-  			$pais = new Pais();
-  			$pais->id = $_POST["pID"];
-  			if($pais->delete()){
-                echo '<script>alert("Contacto eliminado Correctamente...");window.location.href = ""; </script>';
-              }
-	}else {
-        $pais = new Pais();
-        if (isset($_GET["busqueda"]) && $_GET["busqueda"] != ""){ 
-            $busqueda = $_GET['busqueda'];
-            $listaPaises = $pais->busqueda( $busqueda);
-        }else{
-            $listaPaises = $pais->list();
-        }
-
-    }
-
-}else{
+if (isset($_GET["pais"]) && $_GET["pais"] != ""){ 
+    $idPais = $_GET['pais'];
     $pais = new Pais();
-    $listaPaises = $pais->list();
-}  
+    $pais->id = $idPais;
+    $pais->find();
+
+    if(isset($_POST)){
+        if (isset($_POST["setRegionPais"]) && $_POST["setRegionPais"] == "1" && isset($pais)){
+             $idRegion = $_POST["pIdRegion"];
+             $idRegionPais = $_POST["pIdPaisRegion"];
+             if(!isset($idRegionPais) || $idRegionPais == '' ){
+                if( $pais->addPaisRegion($idRegion)){
+                    echo '<script>window.location.href = ""; </script>';
+                  }
+             }else{
+                if( $pais->eliminarPaisRegion($idRegion)){
+                    echo '<script>window.location.href = ""; </script>';
+                  }
+             }        
+         }
+     }
+
+     if(isset($pais->isoCode)){
+    $lista = $pais->regionesDePais();
+}
+}
+
+
+
+
+ 
 ?>
 
 <!DOCTYPE html>
@@ -43,10 +52,10 @@ if(isset($_POST)){
 </head>
 
 <body class="has-background-light" style="height: 100%;">
-    <?php include('../templates/navbar.php');?>
+    <?php include('../../templates/navbar.php');?>
     <div class="columns is-desktop">
         <div class="column  is-2  has-background-light">
-            <?php include('../templates/sidenav.php');?>
+            <?php include('../../templates/sidenav.php');?>
         </div>
         <div class="column is-10 has-background-light" style="border-left: 1px solid #ccc;">
             <!-- Contenido -->
@@ -58,16 +67,16 @@ if(isset($_POST)){
                             <span class="icon ">
                                 <i class="fas fa-globe-americas"></i>
                             </span>
-                            <span>Paises</span>
+                            <span>Regiones en: <?php echo isset($pais) ? $pais->nombre : 'Pais no valido'; ?></span>
                         </h1>
                     </div>
                     <div class="column is-6 " style="text-align:right;">
-                        <a href="crear.php" class="button is-black" title="Agregar un pais">
+                        <!-- <a href="crear.php" class="button is-black" title="Agregar un pais">
                             <span class="icon is-small">
                                 <i class="fas fa-plus-square"></i>
                             </span>
                             <span>Agregar</span>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
 
@@ -88,7 +97,7 @@ if(isset($_POST)){
                     <form action="" method="GET" style="padding: 1em 0;">
                         <div class="field has-addons ">
                             <div class="control  is-expanded">
-                               <input class="input" type="text" placeholder="Ingresar terminos de busqueda" autofocus
+                                <input class="input" type="text" placeholder="Ingresar terminos de busqueda" autofocus
                                     name="busqueda" value="<?php echo isset($busqueda) ? $busqueda : ''; ?>" />
                             </div>
                             <div class="control">
@@ -103,37 +112,51 @@ if(isset($_POST)){
                         <thead>
                             <tr>
                                 <th><abbr title="Position">#</abbr></th>
-                                <th>NOMBRE</th>
-                                <th>ISO</th>
+                                <th>REGION</th>
+                                <th>DESCRIPCION</th>
                                 <th>CREACION</th>
-                                <th>ACTUALIZACION</th>
+                                <th>ACTIVO</th>
                                 <th>ACCIONES</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            <?php if(isset($listaPaises) && count($listaPaises) >  0   ){ ?>
-                            <?php $index = 1; foreach($listaPaises as $value){ ?>
+                            <?php if(isset($lista) && count($lista) >  0   ){ ?>
+                            <?php $index = 1; foreach($lista as $value){ ?>
                             <tr>
                                 <th>
                                     <?php echo $index; ?>
                                 </th>
                                 <td>
-                                    <?php echo $value["nombre"]; ?>
+                                    <?php echo $value["nombreRegion"]; ?>
                                 </td>
                                 <td>
-                                    <?php echo $value["isoCode"]; ?>
+                                    <?php echo $value["descripcion"]; ?>
                                 </td>
                                 <td>
                                     <?php echo $value["creacion"]; ?>
                                 </td>
                                 <td>
-                                    <?php echo $value["actualizacion"]; ?>
+
+
+                                    <form method="POST" action="" style="padding-right: .2em; margin-bottom: 0">
+                                        <!-- <input type="hidden" name="pIdPais" value="<?php echo $value['idPais']; ?>" /> -->
+                                        <input type="hidden" name="pIdRegion"
+                                            value="<?php echo $value['idRegion']; ?>" />
+                                        <input type="hidden" name="pIdPaisRegion"
+                                            value="<?php echo $value['idPais_Region']; ?>" />
+
+                                        <input class="input" type="hidden" name="setRegionPais" value="1" />
+                                        <label class="checkbox">
+                                            <input type="checkbox" id="checkedRegion"
+                                                <?php if(isset($value['idPais_Region']) && $value['idPais_Region'] != ''){ echo "checked"; } ?> />
+                                        </label>
+                                    </form>
                                 </td>
                                 <td>
                                     <div class="buttons are-small">
 
-                                        <form method="POST" action="" style="padding-right: .2em; margin-bottom: 0">
+                                        <!-- <form method="POST" action="" style="padding-right: .2em; margin-bottom: 0">
                                             <input type="hidden" name="pID" value="<?php echo $value['idPais']; ?>" />
                                             <input type="hidden" name="del" value="1" />
                                             <button class="button is-danger is-outlined" title="Eliminar" type="submit"
@@ -152,12 +175,14 @@ if(isset($_POST)){
                                                 <span class="icon is-small">
                                                     <i class="fas fa-edit"></i>
                                                 </span></button>
-                                        </form>
-
-                                        <a href="/diaco-quejas/admin/paises/regiones?pais=<?php echo $value['idPais']; ?>" class="button is-success is-outlined" title="Regiones">
-                                                <span class="icon is-small">
-                                                    <i class="fas fa-flag"></i>
-                                                </span></a>
+                                        </form> -->
+                                        <?php if(isset($value['idPais_Region']) && $value['idPais_Region'] != ''){ ?>
+                                        <a href="/diaco-quejas/admin/paises/regiones?region=<?php echo $value['idPais_Region']; ?>"
+                                            class="button is-link is-outlined" title="Departamentos">
+                                            <span class="icon is-small">
+                                                <i class="fas fa-map-marked-alt"></i>
+                                            </span></a>
+                                        <?php } ?>
                                     </div>
                                 </td>
                             </tr>
@@ -175,6 +200,24 @@ if(isset($_POST)){
             </div>
         </div>
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const $checkboxes = Array.prototype.slice.call(document.querySelectorAll('#checkedRegion'), 0);
+        if ($checkboxes.length > 0) {
+            $checkboxes.forEach(el => {
+                el.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    if (confirm('Actualizar el registro registro?')) {
+                        el.parentNode.parentNode.submit()
+                    }
+                });
+            });
+        }
+
+
+    });
+    </script>
     <script src="/diaco-quejas/admin/recursos/js/funciones.js"></script>
 </body>
 

@@ -1,26 +1,27 @@
 <?php 
-$path = 'paisIndex';
+$path = 'regionIndex';
 
 session_start();
 
 if(isset($_POST)){
 	if(isset($_POST["add"]) && $_POST["add"] == "1"){
-        require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Pais.php');
-  			$pais = new Pais();
-  			$pais->set(
+        require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Region.php'); 
+  			$region = new Region();
+  			$region->set(
   				$_POST["pID"],
   				$_POST["pNombre"],
-  				$_POST["pIsoCode"]
+  				$_POST["pCode"],
+  				$_POST["pDescripcion"]
   			);
-  			if($pais->add())
-  				echo '<script>alert("Pais agregado Correctamente...");window.location.href = "/diaco-quejas/admin/paises"; </script>';
+  			if($region->add())
+  				echo '<script>alert("Region agregado Correctamente...");window.location.href = "/diaco-quejas/admin/regiones"; </script>';
   			else
               $error = true;
 	}elseif(isset($_POST["edit"]) && $_POST["edit"] == "1"){
-        require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Pais.php');
-                $pais = new Pais();
-                $pais->id = $_POST["pID"];
-                $pais->find();
+        require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Region.php');
+                $region = new Region();
+                $region->id = $_POST["pID"];
+                $region->find();
             }  
 }else{
     header('Location: '.'/contacts/contacts/');
@@ -30,6 +31,7 @@ if(isset($_POST)){
 
 <!DOCTYPE html>
 <html lang="en" style="height: 100%;">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -52,44 +54,51 @@ if(isset($_POST)){
             <div class="container" style="padding: 2.5em  0;">
                 <div class="columns is-desktop">
                     <div class="column is-6 ">
-                    <h1 class="title is-4">
-                    <span class="icon ">
-                        <i class="fas fa-globe-americas"></i>
-                    </span>
-                    <span><?php echo isset($pais)  && $pais->id != '0' ? 'Editar' : 'Agregar'; ?> un pais</span>
-                </h1>
+                        <h1 class="title is-4">
+                            <span class="icon ">
+                                <i class="fas fa-flag"></i>
+                            </span>
+                            <span><?php echo isset($region) && $region->id != '0' ? 'Editar' : 'Agregar'; ?> una región</span>
+                        </h1>
                     </div>
                     <div class="column is-6 " style="text-align:right;">
-                    <?php if( isset($pais)) { ?> 
-                        <h4 class="is-4" style="font-weight: bold;"> <?php echo $pais->actualizacion; ?>  </h4>
-                        <?php } ?> 
+                        <?php if( isset($region)) { ?>
+                        <h4 class="is-4" style="font-weight: bold;"> <?php echo $region->actualizacion; ?> </h4>
+                        <?php } ?>
                     </div>
                 </div>
                 <div class="box" style="    padding-bottom: 2.5em; padding-top: 2.5em;">
                     <form action="" method="POST">
                         <input class="input" type="hidden" name="pID"
-                            value="<?php echo isset($pais) ? $pais->id : '0'; ?>">
-                        <input class="input" type="hidden" name="add" value="1">
+                            value="<?php echo isset($region) ? $region->id : '0'; ?>" />
+                        <input class="input" type="hidden" name="add" value="1" />
                         <div class="field">
                             <label class="label">NOMBRE *</label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input " type="text" placeholder="Ingresar nombre para el pais"
-                                    autofocus name="pNombre" required=""
-                                    value="<?php echo isset($pais) ? $pais->nombre : ''; ?>">
+                                <input class="input " type="text" placeholder="Ingresar nombre para la region" autofocus
+                                    name="pNombre" required=""
+                                    value="<?php echo isset($region) ? $region->nombre : ''; ?>" />
                                 <span class="icon is-small is-left">
-                                    <i class="fas fa-globe"></i>
+                                    <i class="fas fa-layer-group"></i>
                                 </span>
                             </div>
                         </div>
                         <div class="field">
-                            <label class="label">ISO *</label>
+                            <label class="label">CODIGO *</label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input " type="number" placeholder="Ingresar codigo ISO del pais"
-                                    name="pIsoCode" required=""
-                                    value="<?php echo isset($pais) ? $pais->isoCode : ''; ?>">
+                                <input class="input " type="text" placeholder="Ingresar codigo unico como identificador para la región"
+                                    name="pCode" required=""
+                                    value="<?php echo isset($region) ? $region->code : ''; ?>" />
                                 <span class="icon is-small is-left">
-                                    <i class="fas fa-flag"></i>
+                                    <i class="fas fa-code"></i>
                                 </span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">DESCRIPCION</label>
+                            <div class="control ">
+                                <textarea class="textarea " type="number" placeholder="Ingresar una descripción"
+                                    name="pDescripcion" ><?php echo isset($region) ? $region->descripcion : ''; ?></textarea>
                             </div>
                         </div>
                         <br>

@@ -9,6 +9,16 @@ class Pais {
 	public $creacion;
 	public $actualizacion;
 
+	/* pais_region */
+
+	public $idRegion; 
+	public $nombreRegion; 
+	public $codeRegion; 
+	public $descripcionRegion; 
+	public $idPaisRegion; 
+	public $creacionPasiRegion; 
+
+
 	private $db;
 
 	function __construct(){
@@ -59,11 +69,37 @@ class Pais {
 
 	public function find(){
 		$query = "SELECT * FROM Pais WHERE idPais = $this->id";
-		$result = $this->db->queryResult($query)[0];
-		$this->nombre = $result["nombre"];
-		$this->isoCode = $result["isoCode"];
-		$this->actualizacion = $result["actualizacion"];
-		$this->creacion = $result["creacion"];
+		$result = $this->db->queryResult($query);
+		if(count($result) > 0){
+			$result = $result[0];
+			$this->nombre = $result["nombre"];
+			$this->isoCode = $result["isoCode"];
+			$this->actualizacion = $result["actualizacion"];
+			$this->creacion = $result["creacion"];
+		}
+	}
+
+
+	public function regionesDePais(){
+		$query = "select r.idRegion, r.nombre as nombreRegion, r.code as codeRegion, r.descripcion, pr.idPais_Region, p.idPais, p.nombre, pr.creacion from Region as r
+		left join Pais_Region as pr
+		on pr.idRegion = r.idRegion
+		left join Pais as p
+		on pr.idPais = p.idPais
+		where p.idPais = $this->id OR p.idPais is null";
+		$result = $this->db->queryResult($query);
+		return $result;
+	}
+
+
+	public function addPaisRegion($idRegion){
+		$query = "insert into Pais_Region(idRegion,idPais) values($idRegion,$this->id)";
+		return $this->db->query($query);
+	}
+
+	public function eliminarPaisRegion($idRegion){
+		$query = "delete from Pais_Region where idRegion = $idRegion and  idPais = $this->id";
+		return $this->db->query($query);
 	}
 
 	public function __destroy(){

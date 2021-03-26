@@ -1,30 +1,30 @@
 <?php 
-$path = 'paisIndex';
-require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Pais.php');
+$path = 'regionIndex';
+require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Region.php');
 
 
 
 if(isset($_POST)){
    if (isset($_POST["del"]) && $_POST["del"] == "1"){
-  			$pais = new Pais();
-  			$pais->id = $_POST["pID"];
-  			if($pais->delete()){
+  			$region = new Region();
+  			$region->id = $_POST["pID"];
+  			if($region->delete()){
                 echo '<script>alert("Contacto eliminado Correctamente...");window.location.href = ""; </script>';
               }
 	}else {
-        $pais = new Pais();
+        $region = new Region();
         if (isset($_GET["busqueda"]) && $_GET["busqueda"] != ""){ 
             $busqueda = $_GET['busqueda'];
-            $listaPaises = $pais->busqueda( $busqueda);
+            $lista = $region->busqueda( $busqueda);
         }else{
-            $listaPaises = $pais->list();
+            $lista = $region->list();
         }
 
     }
 
 }else{
-    $pais = new Pais();
-    $listaPaises = $pais->list();
+    $region = new Region();
+    $lista = $region->list();
 }  
 ?>
 
@@ -56,13 +56,13 @@ if(isset($_POST)){
                     <div class="column is-6 ">
                         <h1 class="title is-3">
                             <span class="icon ">
-                                <i class="fas fa-globe-americas"></i>
+                                <i class="fas fa-flag"></i>
                             </span>
-                            <span>Paises</span>
+                            <span>Regiones</span>
                         </h1>
                     </div>
                     <div class="column is-6 " style="text-align:right;">
-                        <a href="crear.php" class="button is-black" title="Agregar un pais">
+                        <a href="crear.php" class="button is-black" title="Agregar una region">
                             <span class="icon is-small">
                                 <i class="fas fa-plus-square"></i>
                             </span>
@@ -73,18 +73,6 @@ if(isset($_POST)){
 
 
                 <div class="">
-                    <!-- <form action="" method="GET" style="padding: 1em 0;">
-                        <div class="field">
-                            <div class="control has-icons-left has-icons-right">
-                                <input class="input " type="text" placeholder="Ingresar terminos de busqueda" autofocus
-                                    name="busqueda" value="<?php echo isset($busqueda) ? $busqueda : ''; ?>" />
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-search"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </form> -->
-
                     <form action="" method="GET" style="padding: 1em 0;">
                         <div class="field has-addons ">
                             <div class="control  is-expanded">
@@ -97,6 +85,7 @@ if(isset($_POST)){
                         </div>
                     </form>
 
+
                 </div>
                 <div class="box">
                     <table class="table is-striped is-hoverable is-fullwidth">
@@ -104,7 +93,8 @@ if(isset($_POST)){
                             <tr>
                                 <th><abbr title="Position">#</abbr></th>
                                 <th>NOMBRE</th>
-                                <th>ISO</th>
+                                <th>CODIGO</th>
+                                <th>DESCRIPCION</th>
                                 <th>CREACION</th>
                                 <th>ACTUALIZACION</th>
                                 <th>ACCIONES</th>
@@ -112,8 +102,8 @@ if(isset($_POST)){
                         </thead>
                         <tbody>
 
-                            <?php if(isset($listaPaises) && count($listaPaises) >  0   ){ ?>
-                            <?php $index = 1; foreach($listaPaises as $value){ ?>
+                            <?php if(isset($lista) && count($lista) >  0   ){ ?>
+                            <?php $index = 1; foreach($lista as $value){ ?>
                             <tr>
                                 <th>
                                     <?php echo $index; ?>
@@ -122,7 +112,10 @@ if(isset($_POST)){
                                     <?php echo $value["nombre"]; ?>
                                 </td>
                                 <td>
-                                    <?php echo $value["isoCode"]; ?>
+                                    <?php echo $value["code"]; ?>
+                                </td>
+                                <td>
+                                    <?php echo $value["descripcion"]; ?>
                                 </td>
                                 <td>
                                     <?php echo $value["creacion"]; ?>
@@ -134,7 +127,7 @@ if(isset($_POST)){
                                     <div class="buttons are-small">
 
                                         <form method="POST" action="" style="padding-right: .2em; margin-bottom: 0">
-                                            <input type="hidden" name="pID" value="<?php echo $value['idPais']; ?>" />
+                                            <input type="hidden" name="pID" value="<?php echo $value['idRegion']; ?>" />
                                             <input type="hidden" name="del" value="1" />
                                             <button class="button is-danger is-outlined" title="Eliminar" type="submit"
                                                 onclick="return confirm('Esta seguro de eliminar el registro?');">
@@ -146,25 +139,20 @@ if(isset($_POST)){
 
                                         <form method="POST" action="crear.php"
                                             style="padding-right: .2em; margin-bottom: 0">
-                                            <input type="hidden" name="pID" value="<?php echo $value['idPais']; ?>" />
+                                            <input type="hidden" name="pID" value="<?php echo $value['idRegion']; ?>" />
                                             <input class="input" type="hidden" name="edit" value="1" />
                                             <button class="button is-link is-outlined" title="Actualizar">
                                                 <span class="icon is-small">
                                                     <i class="fas fa-edit"></i>
                                                 </span></button>
                                         </form>
-
-                                        <a href="/diaco-quejas/admin/paises/regiones?pais=<?php echo $value['idPais']; ?>" class="button is-success is-outlined" title="Regiones">
-                                                <span class="icon is-small">
-                                                    <i class="fas fa-flag"></i>
-                                                </span></a>
                                     </div>
                                 </td>
                             </tr>
                             <?php $index++; } ?>
                             <?php } else { ?>
                             <tr>
-                                <td colspan="6">
+                                <td colspan="7">
                                     <h3 class="subtitle">No se encontro ningun dato....</h3>
                                 </td>
                             </tr>

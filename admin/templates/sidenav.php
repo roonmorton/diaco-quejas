@@ -1,28 +1,28 @@
 <div style="margin: 1em">
-                <aside class="menu">
+    <aside class="menu">
 
-                    <p class="menu-label">
-                        Inicio
-                    </p>
-                    <ul class="menu-list">
-                        <li>
-                            <a class="<?php if($path == 'adminIndex') echo  'is-active has-background-danger';?> ">
-                                <span class="icon ">
-                                    <i class="fas fa-home"></i>
-                                </span>
-                                <span>Inicio</span>
-                            </a>
-                        </li>
-                        <li><a>
+        <p class="menu-label">
+            Inicio
+        </p>
+        <ul class="menu-list">
+            <li>
+                <a class="<?php if($path == 'adminIndex') echo  'is-active has-background-danger';?> ">
+                    <span class="icon ">
+                        <i class="fas fa-home"></i>
+                    </span>
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li><a>
 
-                                <span class="icon ">
-                                    <i class="fas fa-chart-bar"></i>
-                                </span>
-                                <span>Reportes</span>
+                    <span class="icon ">
+                        <i class="fas fa-chart-bar"></i>
+                    </span>
+                    <span>Reportes</span>
 
-                            </a></li>
-                    </ul>
-                    <!--  <p class="menu-label">
+                </a></li>
+        </ul>
+        <!--  <p class="menu-label">
                         General
                     </p>
                     <ul class="menu-list">
@@ -46,30 +46,33 @@
                         <li><a>Cloud Storage Environment Settings</a></li>
                         <li><a>Authentication</a></li>
                     </ul> -->
-                    <p class="menu-label">
-                        Mantenimientos
-                    </p>
-                    <ul class="menu-list">
-                        <li><a href="paises" class="<?php if($path == 'paisIndex') echo  'is-active has-background-danger';?> ">
-                        <span class="icon ">
-                                    <i class="fas fa-globe-americas"></i>
-                                </span>
-                                <span>Paises</span>
-                        
-                        </a></li>
-                        <li><a>
-                        
-                        <span class="icon ">
-                                    <i class="fas fa-flag"></i>
-                                </span>
-                                <span>Regiones</span>
-                        </a></li>
-                        <li><a>
-                        <span class="icon ">
-                                    <i class="fas fa-gem"></i>
-                                </span>
-                                <span>Comercios</span>
-                                </a></li>
-                    </ul>
-                </aside>
-            </div>
+        <p class="menu-label">
+            Mantenimientos
+        </p>
+        <ul class="menu-list">
+        <li><a href="/diaco-quejas/admin/regiones"
+                    class="<?php if($path == 'regionIndex') echo  'is-active has-background-danger';?> ">
+
+                    <span class="icon ">
+                        <i class="fas fa-flag"></i>
+                    </span>
+                    <span>Regiones</span>
+                </a></li>
+            <li><a href="/diaco-quejas/admin/paises"
+                    class="<?php if($path == 'paisIndex') echo  'is-active has-background-danger';?> ">
+                    <span class="icon ">
+                        <i class="fas fa-globe-americas"></i>
+                    </span>
+                    <span>Paises</span>
+
+                </a></li>
+            
+            <li><a>
+                    <span class="icon ">
+                        <i class="fas fa-gem"></i>
+                    </span>
+                    <span>Comercios</span>
+                </a></li>
+        </ul>
+    </aside>
+</div>
