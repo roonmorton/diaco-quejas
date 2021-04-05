@@ -9,7 +9,7 @@ if(isset($_POST)){
   			$pais = new Pais();
   			$pais->id = $_POST["pID"];
   			if($pais->delete()){
-                echo '<script>alert("Contacto eliminado Correctamente...");window.location.href = ""; </script>';
+                echo '<script>alert("Pais eliminado Correctamente...");window.location.href = ""; </script>';
               }
 	}else {
         $pais = new Pais();
@@ -71,20 +71,7 @@ if(isset($_POST)){
                     </div>
                 </div>
 
-
                 <div class="">
-                    <!-- <form action="" method="GET" style="padding: 1em 0;">
-                        <div class="field">
-                            <div class="control has-icons-left has-icons-right">
-                                <input class="input " type="text" placeholder="Ingresar terminos de busqueda" autofocus
-                                    name="busqueda" value="<?php echo isset($busqueda) ? $busqueda : ''; ?>" />
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-search"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </form> -->
-
                     <form action="" method="GET" style="padding: 1em 0;">
                         <div class="field has-addons ">
                             <div class="control  is-expanded">
@@ -105,6 +92,7 @@ if(isset($_POST)){
                                 <th><abbr title="Position">#</abbr></th>
                                 <th>NOMBRE</th>
                                 <th>ISO</th>
+                                <th>REGIONES</th>
                                 <th>CREACION</th>
                                 <th>ACTUALIZACION</th>
                                 <th>ACCIONES</th>
@@ -123,6 +111,9 @@ if(isset($_POST)){
                                 </td>
                                 <td>
                                     <?php echo $value["isoCode"]; ?>
+                                </td>
+                                <td>
+                                    <?php echo $value["regiones"]; ?>
                                 </td>
                                 <td>
                                     <?php echo $value["creacion"]; ?>
@@ -164,7 +155,7 @@ if(isset($_POST)){
                             <?php $index++; } ?>
                             <?php } else { ?>
                             <tr>
-                                <td colspan="6">
+                                <td colspan="7">
                                     <h3 class="subtitle">No se encontro ningun dato....</h3>
                                 </td>
                             </tr>
