@@ -50,7 +50,7 @@
             Mantenimientos
         </p>
         <ul class="menu-list">
-        <li><a href="/diaco-quejas/admin/regiones"
+            <li><a href="/diaco-quejas/admin/regiones"
                     class="<?php if($path == 'regionIndex') echo  'is-active has-background-danger';?> ">
 
                     <span class="icon ">
@@ -66,8 +66,8 @@
                     <span>Paises</span>
 
                 </a></li>
-            
-            <li><a>
+
+            <li><a href="/diaco-quejas/admin/comercios" class="<?php if($path == 'comercioIndex') echo  'is-active has-background-danger';?> ">
                     <span class="icon ">
                         <i class="fas fa-gem"></i>
                     </span>
