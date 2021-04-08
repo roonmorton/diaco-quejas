@@ -133,7 +133,7 @@ if (isset($_GET["region"]) && $_GET["region"] != "") {
                                             <?php echo $value["nombre"]; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value["municipios"]; ?>
+                                            <span class="tag is-danger is-medium"><?php echo $value["municipios"]; ?></span>
                                         </td>
                                         <td>
                                             <?php echo $value["creacion"]; ?>

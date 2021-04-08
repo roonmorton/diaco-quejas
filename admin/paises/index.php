@@ -113,7 +113,7 @@ if(isset($_POST)){
                                     <?php echo $value["isoCode"]; ?>
                                 </td>
                                 <td>
-                                    <?php echo $value["regiones"]; ?>
+                                    <span class="tag is-danger is-medium"><?php echo $value["regiones"]; ?></span>
                                 </td>
                                 <td>
                                     <?php echo $value["creacion"]; ?>
