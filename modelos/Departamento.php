@@ -90,7 +90,6 @@ class Departamento {
 			$this->idPaisRegion = $result["idPaisRegion"];
 			$this->nombrePais = $result["nombrePais"];
 		}
-		$this->db->close();
 	}
 
 

@@ -62,12 +62,12 @@ if(isset($_POST)){
                         </h1>
                     </div>
                     <div class="column is-6 " style="text-align:right;">
-                        <a href="crear.php" class="button is-black" title="Agregar un pais">
+                        <!-- <a href="crear.php" class="button is-black" title="Agregar un pais">
                             <span class="icon is-small">
                                 <i class="fas fa-plus-square"></i>
                             </span>
                             <span>Agregar</span>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
 
