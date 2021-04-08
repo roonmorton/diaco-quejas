@@ -2,8 +2,13 @@
 $path = 'adminIndex';
 
 require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Queja.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Reportes.php');
+
 $queja = new Queja();
     $quejas = $queja->cantidadQuejasUnMes();
+
+    $reporte = new Reporte();
+    $resumen = $reporte->resumen();
 
 
 ?>
@@ -66,16 +71,22 @@ $queja = new Queja();
                 <div class="columns is-desktop" style="margin-top: 1.5em;">
                     <div class="column is-3 box" style="margin: 10px">
                         <h3 class="title is-5">Comercios</h3>
-                        <h1 class="title is-1">100</h1>
+                        <h1 class="title is-1">
+                        <?php echo isset($resumen) && isset($resumen["comercios"]) ? $resumen["comercios"] : '' ; ?>
+                        </h1>
                     </div>
                     <div class="column is-3 box" style="margin: 10px">
                         <h3 class="title is-5">Sucursales</h3>
-                        <h1 class="title is-1">100</h1>
+                        <h1 class="title is-1">
+                        <?php echo isset($resumen) && isset($resumen["sucursales"]) ? $resumen["sucursales"] : '' ; ?>
+                        </h1>
 
                     </div>
                     <div class="column is-3 box" style="margin: 10px">
                         <h3 class="title is-5">Regiones</h3>
-                        <h1 class="title is-1 ">100</h1>
+                        <h1 class="title is-1 ">
+                        <?php echo isset($resumen) && isset($resumen["regiones"]) ? $resumen["regiones"] : '' ; ?>
+                        </h1>
 
                     </div>
                 </div>
