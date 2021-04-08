@@ -111,9 +111,7 @@ if(isset($_POST)){
                         <div class="field">
                             <label class="label">DESCRIPCION</label>
                             <div class="control has-icons-left has-icons-right">
-                                <textarea class="textarea" placeholder="Ingresar una descripcion para el comercio" name="pDescripcion">
-                            <?php echo isset($comercio) ? $comercio->isoCode : ''; ?>
-                            </textarea>
+                                <textarea class="textarea" placeholder="Ingresar una descripcion para el comercio" name="pDescripcion"><?php echo isset($comercio) ? $comercio->descripcion : ''; ?></textarea>
                             </div>
                         </div>
                         <br>

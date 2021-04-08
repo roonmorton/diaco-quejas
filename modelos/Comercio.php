@@ -56,7 +56,8 @@ class Comercio {
 		/* $query = 'SELECT *, (
 			select count(1) from Pais_Region as pr where pr.idPais = p.idPais
 		) as regiones FROM Pais as p ORDER BY idPais DESC'; */
-		$query = 'SELECT * FROM Comercio as p ORDER BY idComercio DESC';
+		$query = 'SELECT p.*, (
+			select count(1) from Sucursal as s  where s.idComercio = p.idComercio ) as sucursales  FROM Comercio as p ORDER BY idComercio DESC';
 		return $this->db->queryResult($query);
 	}
 
@@ -64,7 +65,8 @@ class Comercio {
 		/* $query = "SELECT *, (
 			select count(1) from Pais_Region as pr where pr.idPais = p.idPais
 		) as regiones FROM Pais as p WHERE UPPER(nombre) LIKE UPPER('%$q%') ORDER BY idPais DESC"; */
-		$query = "SELECT * FROM Comercio as p WHERE UPPER(nombre) LIKE UPPER('%$q%') ORDER BY idComercio DESC";
+		$query = "SELECT p.*, (
+			select count(1) from Sucursal as s  where s.idComercio = p.idComercio ) as sucursales  FROM Comercio as p WHERE UPPER(nombre) LIKE UPPER('%$q%') ORDER BY idComercio DESC";
 		return $this->db->queryResult($query);
 	}
 
@@ -83,6 +85,8 @@ class Comercio {
 			/* $this->regionesCount = $result["regionesCount"]; */
 		}
 	}
+
+	
 
 
 /* 	public function findPaisDeRegion(){
@@ -107,27 +111,17 @@ class Comercio {
 
 		}
 	}
-
-	public function regionesDePais($busqueda){
-		$query = "select r.idRegion, r.nombre as nombreRegion, r.code as codeRegion, r.descripcion, temp.idPais_Region, temp.idPais, temp.nombre, temp.creacion,
-		( select count(1) from Departamento as dp where dp.idPais_Region = temp.idPais_Region ) as departamentos 
-		from Region as r 
-		left join ( 
-			select 
-				pr.idPais_Region, 
-				pr.idRegion, 
-				pr.idPais, 
-				pr.creacion, 
-				pp.nombre from Pais_Region as pr 
-				inner join Pais as pp 
-				on pp.idPais = pr.idPais where pr.idPais = $this->id
-		) as temp
-		on temp.idRegion = r.idRegion";
+*/
+	public function sucursalesDeComercio($busqueda){
+		$query = "select s.* from Sucursal as s 
+		inner join Comercio as c
+		on c.idComercio = s.idComercio 
+		where c.idComercio = $this->id";
 		$result = $this->db->queryResult($query);
 		return $result;
 	}
 
-	public function addPaisRegion($idRegion){
+/*	public function addPaisRegion($idRegion){
 		$query = "insert into Pais_Region(idRegion,idPais) values($idRegion,$this->id)";
 		return $this->db->query($query);
 	}

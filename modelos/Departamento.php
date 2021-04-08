@@ -71,7 +71,7 @@ class Departamento {
 		$this->creacion = $result["creacion"];
 		$this->actualizacion = $result["actualizacion"];
 		$this->idPaisRegion = $result["idPais_Region"];
-
+		$this->db->close();
 	}
 
 	public function findPaisDeDepartamento(){
@@ -89,8 +89,8 @@ class Departamento {
 			$this->idPais = $result["idPais"];
 			$this->idPaisRegion = $result["idPaisRegion"];
 			$this->nombrePais = $result["nombrePais"];
-
 		}
+		$this->db->close();
 	}
 
 
@@ -99,8 +99,8 @@ class Departamento {
 		inner join Municipio as m
 		on m.idDepartamento = dep.idDepartamento
 		where dep.idDepartamento = $this->id";
-		var_dump($query);
 		$result = $this->db->queryResult($query);
+	
 		return $result;
 	}
 
