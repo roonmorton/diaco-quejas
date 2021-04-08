@@ -6,7 +6,7 @@
         </p>
         <ul class="menu-list">
             <li>
-                <a class="<?php if($path == 'adminIndex') echo  'is-active has-background-danger';?> ">
+                <a class="<?php if($path == 'adminIndex') echo  'is-active has-background-danger';?> "  href="/diaco-quejas/admin/">
                     <span class="icon ">
                         <i class="fas fa-home"></i>
                     </span>
@@ -67,11 +67,20 @@
 
                 </a></li>
 
-            <li><a href="/diaco-quejas/admin/comercios" class="<?php if($path == 'comercioIndex') echo  'is-active has-background-danger';?> ">
+            <li><a href="/diaco-quejas/admin/comercios"
+                    class="<?php if($path == 'comercioIndex') echo  'is-active has-background-danger';?> ">
                     <span class="icon ">
                         <i class="fas fa-gem"></i>
                     </span>
                     <span>Comercios</span>
+                </a></li>
+
+            <li><a href="/diaco-quejas/admin/sucursales"
+                    class="<?php if($path == 'sucursalIndex') echo  'is-active has-background-danger';?> ">
+                    <span class="icon ">
+                        <i class="fas fa-gem"></i>
+                    </span>
+                    <span>Sucursales</span>
                 </a></li>
         </ul>
     </aside>
