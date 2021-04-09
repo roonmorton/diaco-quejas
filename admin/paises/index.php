@@ -135,7 +135,7 @@ if(isset($_POST)){
                                             </button>
                                         </form>
 
-                                        <form method="POST" action="crear.php"
+                                        <!-- <form method="POST" action="crear.php"
                                             style="padding-right: .2em; margin-bottom: 0">
                                             <input type="hidden" name="pID" value="<?php echo $value['idPais']; ?>" />
                                             <input class="input" type="hidden" name="edit" value="1" />
@@ -143,7 +143,7 @@ if(isset($_POST)){
                                                 <span class="icon is-small">
                                                     <i class="fas fa-edit"></i>
                                                 </span></button>
-                                        </form>
+                                        </form> -->
 
                                         <a href="/diaco-quejas/admin/paises/regiones?pais=<?php echo $value['idPais']; ?>" class="button is-success is-outlined" title="Regiones">
                                                 <span class="icon is-small">

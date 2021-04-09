@@ -1,13 +1,11 @@
 <?php 
-$path = 'sucursalReporte';
+$path = 'quejaReporte';
 require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Reportes.php');
 
 
 $busqueda = isset($_GET["busqueda"]) ? $_GET["busqueda"] : "";
 $reporte = new Reporte();
-            $lista = $reporte->resumenSucursales($busqueda);
-        
-  
+            $lista = $reporte->resumenQuejas($busqueda);  
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +36,7 @@ $reporte = new Reporte();
                     <div class="column is-6 ">
                         <h1 class="title is-3">
                             <span class="icon ">
-                                <i class="fas fa-gem"></i>
+                                <i class="fas fa-heart-broken"></i>
                             </span>
                             <span>Sucursales</span>
                         </h1>
@@ -66,11 +64,11 @@ $reporte = new Reporte();
                         <thead>
                             <tr>
                                 <th><abbr title="Position">#</abbr></th>
-                                <th>COMERCIO</th>
-                                <th>REGION</th>
-                                <th>DEPARTAMENTO</th>
-                                <th>MUNICIPIO</th>
-                                <th>QUEJAS</th>
+                                <th>USUARIO</th>
+                                <th>DESCRIPCION</th>
+                                <th>SUCURSAL</th>
+                                <th>CREACION</th>
+                                <th>ACCIONES</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -82,21 +80,27 @@ $reporte = new Reporte();
                                     <?php echo $index; ?>
                                 </th>
                                 <td>
+                                    <?php echo $value["usuario"]; ?>
+                                </td>
+                                <td>
+                                    <?php echo $value["descripcion"]; ?>
+                                </td>
+                                <td>
                                     <?php echo $value["comercio"] . ' - ' . $value["sucursal"]; ?>
                                 </td>
                                 <td>
-                                    <?php echo $value["region"]; ?>
+                                    <?php echo $value["creacion"]; ?>
                                 </td>
                                 <td>
-                                    <?php echo $value["departamento"]; ?>
+                                    <div class="buttons are-small">
+                                        <a href="/diaco-quejas/admin/quejas/detalle.php?queja=<?php echo $value['idQueja']; ?>"
+                                            class="button is-success is-outlined" title="Detalle de queja">
+                                            <span class="icon is-small">
+                                                <i class="fas fa-info"></i>
+                                            </span></a>
+                                    </div>
                                 </td>
-                                <td>
-                                    <?php echo $value["municipio"]; ?>
-                                </td>
-                                <td>
-                                    <span class="tag is-danger is-medium"><?php echo $value["quejas"]; ?></span>
-                                </td>
-                               
+
                             </tr>
                             <?php $index++; } ?>
                             <?php } else { ?>

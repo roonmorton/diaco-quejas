@@ -70,22 +70,37 @@ $queja = new Queja();
 
                 <div class="columns is-desktop" style="margin-top: 1.5em;">
                     <div class="column is-3 box" style="margin: 10px">
-                        <h3 class="title is-5">Comercios</h3>
+                        <h3 class="title is-4">
+                            <span class="icon ">
+                                <i class="fas fa-store-alt"></i>
+                            </span>
+                            <span>Comercios</span>
+                        </h3>
                         <h1 class="title is-1">
-                        <?php echo isset($resumen) && isset($resumen["comercios"]) ? $resumen["comercios"] : '' ; ?>
+                            <?php echo isset($resumen) && isset($resumen["comercios"]) ? $resumen["comercios"] : '' ; ?>
                         </h1>
                     </div>
                     <div class="column is-3 box" style="margin: 10px">
-                        <h3 class="title is-5">Sucursales</h3>
+                        <h3 class="title is-4">
+                            <span class="icon ">
+                                <i class="fas fa-store"></i>
+                            </span>
+                            <span>Sucursales</span>
+                        </h3>
                         <h1 class="title is-1">
-                        <?php echo isset($resumen) && isset($resumen["sucursales"]) ? $resumen["sucursales"] : '' ; ?>
+                            <?php echo isset($resumen) && isset($resumen["sucursales"]) ? $resumen["sucursales"] : '' ; ?>
                         </h1>
 
                     </div>
                     <div class="column is-3 box" style="margin: 10px">
-                        <h3 class="title is-5">Regiones</h3>
+                        <h3 class="title is-4">
+                            <span class="icon ">
+                                <i class="fas fa-flag"></i>
+                            </span>
+                            <span>Regiones</span>
+                        </h3>
                         <h1 class="title is-1 ">
-                        <?php echo isset($resumen) && isset($resumen["regiones"]) ? $resumen["regiones"] : '' ; ?>
+                            <?php echo isset($resumen) && isset($resumen["regiones"]) ? $resumen["regiones"] : '' ; ?>
                         </h1>
 
                     </div>
@@ -95,7 +110,12 @@ $queja = new Queja();
 
                     <div class="columns is-desktop" style="padding: .8rem .8rem 0 0.8rem">
                         <div class="column is-6 " style="padding: 0;">
-                            <h3 class="title is-5" style="margin-bottom: .5em;">Quejas</h3>
+                            <h3 class="title is-4" style="margin-bottom: .5em;">
+                                <span class="icon ">
+                                    <i class="fas fa-chart-area"></i>
+                                </span>
+                                <span>Quejas</span>
+                            </h3>
                         </div>
                         <div class="column is-6 " style="text-align:right; padding: 0;">
                             <!-- <a href="crear.php" class="button is-black" title="Agregar un pais">
@@ -106,7 +126,7 @@ $queja = new Queja();
                         </a> -->
                         </div>
                     </div>
-                    <hr style="margin: 0;">
+                    <!--  <hr style="margin: 0;"> -->
                     <canvas id="myChart" width="400" height="120"></canvas>
 
                 </div>
@@ -124,20 +144,42 @@ $queja = new Queja();
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [<?php if(isset($quejas["quejas"] )){ foreach ($quejas["dias"] as $valor) { echo "'$valor'"; } }?>],
+            labels: [
+                <?php if(isset($quejas["quejas"] )){ foreach ($quejas["dias"] as $valor) { echo "'$valor',"; } }?>
+            ],
+           
             datasets: [{
-                label: 'Ultimas quejas registradas',
-                data: [<?php if(isset($quejas["quejas"] )){ foreach ($quejas["quejas"] as $valor) { echo $valor; } }?>],
-                fill: false,
-                borderColor: 'rgb(75, 192, 192)',
+                label: 'Quejas',
+                data: [
+                    <?php $max = 0; if(isset($quejas["quejas"] )){ foreach ($quejas["quejas"] as $valor) {  
+                        $max = $valor > $max ? $valor : $max;
+                        echo $valor.',';
+                         } }?>
+                ],
+                fill: 'start',
+                borderColor: '#f14668',
+                backgroundColor: '#fb9fb2',
                 tension: 0.1
             }]
         },
         options: {
+            responsive: true,
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    suggestedMax: <?php echo $max+1 ;?>,
+                },
+            },
+            plugins: {
+                filler: {
+                    propagate: false,
+                },
+                title: {
+                    display: true,
                 }
+            },
+            interaction: {
+                intersect: false,
             }
         }
     });

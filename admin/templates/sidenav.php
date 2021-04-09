@@ -13,14 +13,28 @@
                     <span>Inicio</span>
                 </a>
             </li>
-            <li><a>
+            <li><a href="/diaco-quejas/admin/sucursales"
+                    class="<?php if($path == 'sucursalReporte') echo  'is-active has-background-danger';?> ">
+                    <span class="icon ">
+                        <i class="fas fa-gem"></i>
+                    </span>
+                    <span>Sucursales</span>
+                </a></li>
+                <li><a href="/diaco-quejas/admin/quejas"
+                    class="<?php if($path == 'quejaReporte') echo  'is-active has-background-danger';?> ">
+                    <span class="icon ">
+                        <i class="fas fa-heart-broken"></i>
+                    </span>
+                    <span>Quejas</span>
+                </a></li>
+            <!-- <li><a>
 
                     <span class="icon ">
                         <i class="fas fa-chart-bar"></i>
                     </span>
                     <span>Reportes</span>
 
-                </a></li>
+                </a></li> -->
         </ul>
         <!--  <p class="menu-label">
                         General
@@ -75,13 +89,7 @@
                     <span>Comercios</span>
                 </a></li>
 
-            <li><a href="/diaco-quejas/admin/sucursales"
-                    class="<?php if($path == 'sucursalIndex') echo  'is-active has-background-danger';?> ">
-                    <span class="icon ">
-                        <i class="fas fa-gem"></i>
-                    </span>
-                    <span>Sucursales</span>
-                </a></li>
+            
         </ul>
     </aside>
 </div>

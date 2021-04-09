@@ -176,7 +176,7 @@ class Queja {
 
 
 	public function cantidadQuejasUnMes() {
-		$query = "select Date_format(q.creacion,'%M-%d') as dia, count(DAY(q.creacion)) as cantidad from Queja as q where creacion between date_add(NOW(), INTERVAL -1 MONTH) AND  NOW() group by DAY(q.creacion)";
+		$query = "select Date_format(q.creacion,'%M-%d') as dia, count(DAY(q.creacion)) as cantidad from Queja as q where creacion between date_add(NOW(), INTERVAL -1 MONTH) AND  NOW() group by DAY(q.creacion) order by q.creacion ASC";
 		$result = $this->db->queryResult($query);
 		$res = [
 			"dias" => [],
