@@ -13,7 +13,11 @@ class Reporte {
 
 	
 	public function resumen(){
-		$query = 'select * from (select count(1) as comercios from Comercio) as comercio, (select count(1) as sucursales from Sucursal) as sucursal, (select count(1) as regiones from Region) as region';
+		$query = 'select * from 
+		(select count(1) as comercios from Comercio) as comercio, 
+		(select count(1) as sucursales from Sucursal) as sucursal, 
+		(select count(1) as regiones from Region) as region,
+		(select count(1) as quejas from Queja) as queja';
 		$result = $this->db->queryResult($query);
 		$res; 
 		if(isset($result) && count($result) >  0   ){ 

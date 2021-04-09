@@ -68,8 +68,9 @@ $queja = new Queja();
 
                 </div> -->
 
-                <div class="columns is-desktop" style="margin-top: 1.5em;">
-                    <div class="column is-3 box" style="margin: 10px">
+                <div class="columns is-desktop  is-4" style="margin-top: 1.5em;">
+                    <div class="column is-3 " >
+                        <div class="box">
                         <h3 class="title is-4">
                             <span class="icon ">
                                 <i class="fas fa-store-alt"></i>
@@ -78,10 +79,11 @@ $queja = new Queja();
                         </h3>
                         <h1 class="title is-1">
                             <?php echo isset($resumen) && isset($resumen["comercios"]) ? $resumen["comercios"] : '' ; ?>
-                        </h1>
+                        </h1></div>
                     </div>
-                    <div class="column is-3 box" style="margin: 10px">
-                        <h3 class="title is-4">
+                    <div class="column is-3 " >
+                    <div class="box">
+                    <h3 class="title is-4">
                             <span class="icon ">
                                 <i class="fas fa-store"></i>
                             </span>
@@ -90,10 +92,13 @@ $queja = new Queja();
                         <h1 class="title is-1">
                             <?php echo isset($resumen) && isset($resumen["sucursales"]) ? $resumen["sucursales"] : '' ; ?>
                         </h1>
+                    </div>
+                        
 
                     </div>
-                    <div class="column is-3 box" style="margin: 10px">
-                        <h3 class="title is-4">
+                    <div class="column is-3 " >
+                    <div class="box">
+                    <h3 class="title is-4">
                             <span class="icon ">
                                 <i class="fas fa-flag"></i>
                             </span>
@@ -102,10 +107,25 @@ $queja = new Queja();
                         <h1 class="title is-1 ">
                             <?php echo isset($resumen) && isset($resumen["regiones"]) ? $resumen["regiones"] : '' ; ?>
                         </h1>
+                    </div>
+                        
 
                     </div>
+                    
                 </div>
 
+                <div class="box" style="margin-rigth: 10px">
+                        <h3 class="title is-4" style="text-align:center">
+                            <span class="icon ">
+                                <i class="fas fa-heart-broken"></i>
+                            </span>
+                            <span>Quejas</span>
+                        </h3>
+                        <h1 class="title is-1 " style="text-align:center">
+                            <?php echo isset($resumen) && isset($resumen["quejas"]) ? $resumen["quejas"] : '' ; ?>
+                        </h1>
+
+                    </div>
                 <div class="box" style="margin-top: 2em;">
 
                     <div class="columns is-desktop" style="padding: .8rem .8rem 0 0.8rem">
