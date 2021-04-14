@@ -6,21 +6,35 @@
         </p>
         <ul class="menu-list">
             <li>
-                <a class="<?php if($path == 'adminIndex') echo  'is-active has-background-danger';?> ">
+                <a class="<?php if($path == 'adminIndex') echo  'is-active has-background-danger';?> "  href="/diaco-quejas/admin/">
                     <span class="icon ">
                         <i class="fas fa-home"></i>
                     </span>
                     <span>Inicio</span>
                 </a>
             </li>
-            <li><a>
+            <li><a href="/diaco-quejas/admin/sucursales"
+                    class="<?php if($path == 'sucursalReporte') echo  'is-active has-background-danger';?> ">
+                    <span class="icon ">
+                        <i class="fas fa-gem"></i>
+                    </span>
+                    <span>Sucursales</span>
+                </a></li>
+                <li><a href="/diaco-quejas/admin/quejas"
+                    class="<?php if($path == 'quejaReporte') echo  'is-active has-background-danger';?> ">
+                    <span class="icon ">
+                        <i class="fas fa-heart-broken"></i>
+                    </span>
+                    <span>Quejas</span>
+                </a></li>
+            <!-- <li><a>
 
                     <span class="icon ">
                         <i class="fas fa-chart-bar"></i>
                     </span>
                     <span>Reportes</span>
 
-                </a></li>
+                </a></li> -->
         </ul>
         <!--  <p class="menu-label">
                         General
@@ -50,7 +64,7 @@
             Mantenimientos
         </p>
         <ul class="menu-list">
-        <li><a href="/diaco-quejas/admin/regiones"
+            <li><a href="/diaco-quejas/admin/regiones"
                     class="<?php if($path == 'regionIndex') echo  'is-active has-background-danger';?> ">
 
                     <span class="icon ">
@@ -66,13 +80,16 @@
                     <span>Paises</span>
 
                 </a></li>
-            
-            <li><a>
+
+            <li><a href="/diaco-quejas/admin/comercios"
+                    class="<?php if($path == 'comercioIndex') echo  'is-active has-background-danger';?> ">
                     <span class="icon ">
                         <i class="fas fa-gem"></i>
                     </span>
                     <span>Comercios</span>
                 </a></li>
+
+            
         </ul>
     </aside>
 </div>

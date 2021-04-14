@@ -2,19 +2,19 @@
 
 require_once($_SERVER['DOCUMENT_ROOT'] .'/diaco-quejas/utilidades/Database.php');
 
-class Pais {
+class Queja {
     public $id;
 	public $nombre;
-	public $isoCode;
+	public $telefono;
+	public $direccion;
 	public $creacion;
 	public $actualizacion;
-	public $regionesCount;
+	
+	public $idMunicipio; 
+	public $idComercio;
+	public $idDepartamento;
+	public $idPais;
 
-	public $idRegion; 
-	public $nombreRegion; 
-	public $codeRegion; 
-	public $descripcionRegion; 
-	public $idPaisRegion; 
 
 
 	private $db;
@@ -27,11 +27,18 @@ class Pais {
 	public function set (
 		$id,
 		$nombre,
-		$isoCode
+		$telefono,
+		$direccion,
+		$idMunicipio,
+		$idComercio
 	){
 		$this->id = $id;
 		$this->nombre = $nombre;
-		$this->isoCode = $isoCode;
+		$this->telefono = $telefono;
+		$this->direccion = $direccion;
+		$this->idMunicipio = $idMunicipio;
+		$this->idComercio = $idComercio;
+
 	}
 
 
@@ -39,10 +46,9 @@ class Pais {
 		$res = true;
 		$query = "";
 		if($this->id  == "0" ){
-			$query ="INSERT INTO Pais (nombre, isoCode) VALUES ('$this->nombre', '$this->isoCode');";
+			$query ="INSERT INTO Sucursal (nombre, telefono, direccion, idMunicipio, idComercio) VALUES ('$this->nombre', '$this->telefono', '$this->direccion', '$this->idMunicipio', '$this->idComercio');";
 		}else{
-			$query = "UPDATE Pais SET nombre = '$this->nombre', isoCode = '$this->isoCode' WHERE idPais = '$this->id'";
-
+			$query = "UPDATE Sucursal SET nombre = '$this->nombre', idMunicipio = '$this->idMunicipio', telefono = '$this->telefono' , direccion = '$this->direccion', idComercio = '$this->idComercio' WHERE idSucursal = '$this->id'";
 		}
 		if(!$this->db->query($query))
 			$res = false;
@@ -50,40 +56,61 @@ class Pais {
 	}
 
 	public function delete(){
-		$query = "DELETE FROM Pais WHERE idPais = $this->id";
+		$query = "DELETE FROM Sucursal WHERE idSucursal = $this->id";
 		return $this->db->query($query);
 
 	}
 
 	public function list(){
-		$query = 'SELECT *, (
+		/* $query = 'SELECT *, (
 			select count(1) from Pais_Region as pr where pr.idPais = p.idPais
-		) as regiones FROM Pais as p ORDER BY idPais DESC';
+		) as regiones FROM Pais as p ORDER BY idPais DESC'; */
+		$query = 'SELECT * FROM Sucursal as p ORDER BY idSucursal DESC';
 		return $this->db->queryResult($query);
 	}
 
 	public function busqueda($q){
-		$query = "SELECT *, (
+		/* $query = "SELECT *, (
 			select count(1) from Pais_Region as pr where pr.idPais = p.idPais
-		) as regiones FROM Pais as p WHERE UPPER(nombre) LIKE UPPER('%$q%') ORDER BY idPais DESC";
+		) as regiones FROM Pais as p WHERE UPPER(nombre) LIKE UPPER('%$q%') ORDER BY idPais DESC"; */
+		$query = "SELECT * FROM Sucursal as p WHERE UPPER(nombre) LIKE UPPER('%$q%') ORDER BY idComercio DESC";
 		return $this->db->queryResult($query);
 	}
 
+	
+
 	public function find(){
-		$query = "SELECT * FROM Pais WHERE idPais = $this->id";
+		$query = "SELECT s.*, d.idDepartamento, pr.idPais FROM Sucursal as s 
+		inner join Municipio as m 
+		on m.idMunicipio = s.idMunicipio
+		inner join Departamento as d 
+		on d.idDepartamento = m.idDepartamento
+		inner join Pais_Region pr 
+		on pr.idPais_Region = d.idPais_Region
+		 WHERE idSucursal = $this->id";
 		$result = $this->db->queryResult($query);
 		if(count($result) > 0){
 			$result = $result[0];
 			$this->nombre = $result["nombre"];
-			$this->isoCode = $result["isoCode"];
+			$this->idComercio = $result["idComercio"];
+			$this->idMunicipio = $result["idMunicipio"];
+			$this->idDepartamento = $result["idDepartamento"];
+			$this->idPais = $result["idPais"];
+
+			
+
+			$this->telefono = $result["telefono"];
+			$this->direccion = $result["direccion"];
+
 			$this->actualizacion = $result["actualizacion"];
 			$this->creacion = $result["creacion"];
 			/* $this->regionesCount = $result["regionesCount"]; */
 		}
+		$this->db->close();
 	}
 
 
-	public function findPaisDeRegion(){
+/* 	public function findPaisDeRegion(){
 		$query = "select  p.*, r.idRegion, r.nombre as nombreRegion, r.code as codeRegion, r.descripcion as descripcionRegion from Region as r
 		inner join Pais_Region as pr
 		on pr.idRegion = r.idRegion
@@ -125,20 +152,6 @@ class Pais {
 		return $result;
 	}
 
-
-	public function departamentosDePais($busqueda){
-		$query = "select d.* from Pais as p
-		inner join Pais_Region as pr
-		on pr.idPais = p.idPais
-		inner join Departamento as d 
-		on d.idPais_Region = pr.idPais_Region 
-		where p.idPais = $this->id";
-		$result = $this->db->queryResult($query);
-		return $result;
-	}
-
-
-
 	public function addPaisRegion($idRegion){
 		$query = "insert into Pais_Region(idRegion,idPais) values($idRegion,$this->id)";
 		return $this->db->query($query);
@@ -159,6 +172,24 @@ class Pais {
 		where dep.idPais_Region = $this->idPaisRegion  ";
 		$result = $this->db->queryResult($query);
 		return $result;
+	} */
+
+
+	public function cantidadQuejasUnMes() {
+		$query = "select Date_format(q.creacion,'%M-%d') as dia, count(DAY(q.creacion)) as cantidad from Queja as q where creacion between date_add(NOW(), INTERVAL -1 MONTH) AND  NOW() group by DAY(q.creacion) order by q.creacion ASC";
+		$result = $this->db->queryResult($query);
+		$res = [
+			"dias" => [],
+			"quejas" => [],
+		];
+		 if(isset($result) && count($result) >  0   ){ 
+			 foreach($result as $value){ 
+				array_push($res["dias"], $value["dia"]);
+				array_push($res["quejas"], $value["cantidad"]);
+
+			 }
+			}
+		return $res;
 	}
 
 	public function __destroy(){

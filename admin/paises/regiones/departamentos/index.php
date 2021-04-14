@@ -73,7 +73,7 @@ if (isset($_GET["region"]) && $_GET["region"] != "") {
             <div class="container" style="padding: 2em  0;">
                 <div class="columns is-desktop">
                     <div class="column is-6 ">
-                        <h2 class="title is-4">
+                        <h2 class="title is-3">
                             <span class="icon ">
                                 <i class="fas fa-globe"></i>
                             </span>
@@ -133,7 +133,7 @@ if (isset($_GET["region"]) && $_GET["region"] != "") {
                                             <?php echo $value["nombre"]; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value["municipios"]; ?>
+                                            <span class="tag is-danger is-medium"><?php echo $value["municipios"]; ?></span>
                                         </td>
                                         <td>
                                             <?php echo $value["creacion"]; ?>
