@@ -57,7 +57,7 @@ class Reporte {
 		on s.idSucursal = q.idSucursal
 		inner join Comercio as c 
 		on c.idComercio = s.idComercio
-		where s.nombre like '%$query%' OR c.nombre like '%$query%'";
+		where s.nombre like '%$query%' OR c.nombre like '%$query%' order by q.idQueja DESC";
 		$result = $this->db->queryResult($query);
 		return $result;
 	}

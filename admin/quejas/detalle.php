@@ -53,28 +53,6 @@ if($idQueja != ''){
                     <?php if (isset($queja) && isset($queja['creacion'])) { ?>
                     <form action="" method="POST">
                         <div class="field">
-                            <label class="label">NOMBRE</label>
-                            <div class="control has-icons-left has-icons-right">
-                                <input class="input " type="text" placeholder="Nombre de cliente" autofocus required=""
-                                    disabled
-                                    value="<?php echo isset($queja) && isset($queja['usuario']) ? $queja['usuario'] : ''; ?>">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-user"></i>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="label">TELEFONO</label>
-                            <div class="control has-icons-left has-icons-right">
-                                <input class="input " type="text" placeholder="Telefono de cliente" required="" disabled
-                                    value="<?php echo isset($queja) && isset($queja['telefono']) ? $queja['telefono'] : ''; ?>">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-flag"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="field">
                             <label class="label">PAIS</label>
                             <div class="control has-icons-left has-icons-right">
                                 <input class="input " type="text" placeholder="Pais de comercio" required="" disabled
@@ -133,7 +111,28 @@ if($idQueja != ''){
                                 </span>
                             </div>
                         </div>
+                        <div class="field">
+                            <label class="label">NOMBRE</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input " type="text" placeholder="Nombre de cliente" autofocus required=""
+                                    disabled
+                                    value="<?php echo isset($queja) && isset($queja['usuario']) ? $queja['usuario'] : ''; ?>">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                            </div>
+                        </div>
 
+                        <div class="field">
+                            <label class="label">TELEFONO</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input " type="text" placeholder="Telefono de cliente" required="" disabled
+                                    value="<?php echo isset($queja) && isset($queja['telefono']) ? $queja['telefono'] : ''; ?>">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-phone"></i>
+                                </span>
+                            </div>
+                        </div>
                         <div class="field">
                             <label class="label"> DETALLE QUEJA</label>
                             <div class="control ">

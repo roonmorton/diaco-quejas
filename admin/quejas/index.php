@@ -38,7 +38,7 @@ $reporte = new Reporte();
                             <span class="icon ">
                                 <i class="fas fa-heart-broken"></i>
                             </span>
-                            <span>Sucursales</span>
+                            <span>Quejas</span>
                         </h1>
                     </div>
                     <div class="column is-6 " style="text-align:right;">

@@ -174,6 +174,61 @@ class Sucursal {
 		return $result;
 	} */
 
+	public function resumenSucursales($query){
+		$query = "select s.idSucursal, s.nombre as sucursal, s.direccion, s.telefono, c.nombre as comercio, m.nombre as municipio,
+		d.nombre as departamento, r.nombre as region
+		 from Sucursal as s 
+		inner join Comercio as c 
+		on c.idComercio = s.idComercio
+		inner join Municipio as m 
+		on m.idMunicipio = s.idMunicipio
+		inner join Departamento as d 
+		on d.idDepartamento = m.idDepartamento
+		inner join Pais_Region as pr
+		on pr.idPais_Region = d.idPais_Region
+		inner join Region as r 
+		on r.idRegion = pr.idRegion
+		where upper(s.nombre) like upper('%$query%') 
+		OR upper(c.nombre) like upper('%$query%') OR upper(m.nombre) like upper('%$query%') 
+		OR upper(r.nombre) like upper('%$query%') order by c.nombre, s.nombre ASC";
+		$result = $this->db->queryResult($query);
+		return $result;
+	}
+
+
+	public function obtenerInfoSucursal($idSucursal){
+		$query = "select
+		s.idSucursal,
+		s.direccion,
+		s.nombre as sucursal, 
+		c.nombre as comercio,
+		m.nombre as municipio,
+		d.nombre as departamento,
+		r.nombre as region,
+		p.nombre as pais
+		from  Sucursal as s
+	inner join Comercio as c 
+	on c.idComercio = s.idComercio
+	inner join Municipio as m
+	on m.idMunicipio = s.idMunicipio
+	inner join Departamento as d 
+	on d.idDepartamento = m.idDepartamento
+	inner join Pais_Region as pr
+	on pr.idPais_Region = d.idPais_Region
+	inner join Region as r
+	on r.idRegion = pr.idRegion
+	inner join Pais as p
+	on p.idPais = pr.idPais
+    where idSucursal = $idSucursal";
+		$result = $this->db->queryResult($query);
+		$res = null; 
+		if(isset($result) && count($result) >  0   ){ 
+			$res = $result[0];
+		   }
+		return $res;
+	}
+
+
 	public function __destroy(){
         $this->db->close();
     }
