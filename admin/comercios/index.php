@@ -1,4 +1,5 @@
 <?php 
+include($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/utilidades/Sesion.php');
 $path = 'comercioIndex';
 require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Comercio.php');
 

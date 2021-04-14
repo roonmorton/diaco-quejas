@@ -1,9 +1,38 @@
+<?php 
+$path = 'quejaReporte';
+
+
+
+$usuario = isset($_POST["usuario"])  ? $_POST["usuario"] : null;
+$contrasenia = isset($_POST["contrasenia"])  ? $_POST["contrasenia"] : null;
+	if($usuario != null && $contrasenia != null){
+        require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Usuario.php');
+  			$u = new Usuario();
+  			$u->set(
+  				$usuario,
+                $contrasenia
+
+  			);
+  			if($u->iniciarSesion())
+              header('Location: '.'/diaco-quejas/admin');
+  			else
+              $error = true;
+	} 
+
+
+
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Diaco - Admin</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css" />
@@ -14,12 +43,12 @@
 
 <body class="has-background-light" style="height: 100vh;">
 
-    <nav class="navbar is-" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-danger " role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
                 <a class="navbar-item" href="https://bulma.io">
                     <h2 class="subtitle is-family-secondary">
-                        <strong>
+                        <strong style="color:#fff;">
                             Diaco - Quejas
                         </strong>
                     </h2>
@@ -36,7 +65,7 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
-                            <a class="button ">
+                            <a class="button  is-info is-light" href="/diaco-quejas">
                                 <strong>Salir</strong>
                             </a>
                         </div>
@@ -59,28 +88,38 @@
             </div>
 
             <div class="box" style="margin-top:1em; margin: 1em;">
-                <div class="field">
-                    <label class="label">Correo</label>
-                    <div class="control has-icons-left has-icons-right">
-                        <input class="input " type="email" placeholder="Ingresar correo" value="" required autofocus />
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-envelope"></i>
-                        </span>
+                <form action="" method="POST">
+                    <div class="field">
+                        <label class="label">Usuario</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input " type="text" placeholder="Ingresar usuario" value="" required=""
+                                autofocus name="usuario" />
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="field">
-                    <label class="label">Contraseña</label>
-                    <div class="control has-icons-left has-icons-right">
-                        <input class="input " type="password" placeholder="*****" value="" />
-                        <span class="icon is-small is-left">
-                            <i class="fas fa-key"></i>
-                        </span>
+                    <div class="field">
+                        <label class="label">Contraseña</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input " type="password" placeholder="*****" value="" required=""
+                                name="contrasenia" />
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-key"></i>
+                            </span>
+                        </div>
                     </div>
-                </div>
-                <br/>
-                <input type="button" class="button is-danger is-fullwidth" value="Iniciar" />
-
+                    <br />
+                    <input type="submit" class="button is-danger is-fullwidth" value="Iniciar" />
+                </form>
+                <br>
+                <?php if(isset($error) && $error){ ?>
+                    <div class="notification is-danger is-light">
+                        <button class="delete"></button>
+                        Usuario/contraseña incorrecta...
+                    </div>
+                    <?php } ?>
             </div>
         </div>
     </div>

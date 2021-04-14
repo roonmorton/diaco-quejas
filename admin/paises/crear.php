@@ -1,4 +1,5 @@
 <?php 
+include($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/utilidades/Sesion.php');
 $path = 'paisIndex';
 
 session_start();

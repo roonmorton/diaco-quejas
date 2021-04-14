@@ -78,7 +78,6 @@ class Pais {
 			$this->isoCode = $result["isoCode"];
 			$this->actualizacion = $result["actualizacion"];
 			$this->creacion = $result["creacion"];
-			/* $this->regionesCount = $result["regionesCount"]; */
 		}
 	}
 

@@ -1,4 +1,5 @@
 <?php 
+include($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/utilidades/Sesion.php');
 $path = 'sucursalReporte';
 require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Reportes.php');
 

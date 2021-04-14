@@ -9,7 +9,6 @@ class Region {
 	public $descripcion; 
 	public $creacion;
 	public $actualizacion;
-	/* public $idPais; */
 
 	private $db;
 
@@ -22,14 +21,12 @@ class Region {
 		$id,
 		$nombre,
 		$code,
-		$descripcion/* ,
-		$idPais */
+		$descripcion
 	){
 		$this->id = $id;
 		$this->nombre = $nombre;
 		$this->code = $code;
 		$this->descripcion = $descripcion;
-		/* $this->idPais = $idPais; */
 	}
 
 
@@ -69,7 +66,6 @@ class Region {
 		$this->nombre = $result["nombre"];
 		$this->code = $result["code"];
 		$this->descripcion = $result["descripcion"];
-		/* $this->idPais = $result["idPais"]; */
 		$this->actualizacion = $result["actualizacion"];
 		$this->creacion = $result["creacion"];
 	}

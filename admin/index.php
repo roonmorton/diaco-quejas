@@ -1,5 +1,8 @@
 <?php 
+include($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/utilidades/Sesion.php');
+
 $path = 'adminIndex';
+
 
 require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Queja.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Reportes.php');
@@ -52,22 +55,6 @@ $queja = new Queja();
                     <div class="column is-6 " style="text-align:right;">
                     </div>
                 </div>
-
-                <!-- <div class="">
-                    <form action="" method="GET" style="padding: 1em 0;">
-                        <div class="field has-addons ">
-                            <div class="control  is-expanded">
-                               <input class="input" type="text" placeholder="Ingresar terminos de busqueda" autofocus
-                                    name="busqueda" value="<?php echo isset($busqueda) ? $busqueda : ''; ?>" />
-                            </div>
-                            <div class="control">
-                                <input class="button is-danger" value="Buscar" type="submit">
-                            </div>
-                        </div>
-                    </form>
-
-                </div> -->
-
                 <div class="columns is-desktop  is-4" style="margin-top: 1.5em;">
                     <div class="column is-3 " >
                         <div class="box">
@@ -93,8 +80,6 @@ $queja = new Queja();
                             <?php echo isset($resumen) && isset($resumen["sucursales"]) ? $resumen["sucursales"] : '' ; ?>
                         </h1>
                     </div>
-                        
-
                     </div>
                     <div class="column is-3 " >
                     <div class="box">
