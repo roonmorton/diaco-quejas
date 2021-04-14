@@ -1,6 +1,13 @@
 <?php 
 $path = 'quejaReporte';
 
+session_start();
+    $uNombres = isset($_SESSION["nombres"]) ? $_SESSION["nombres"] : null;
+    $uApellidos = isset($_SESSION["apellidos"]) ? $_SESSION["apellidos"] : null;
+    $uUsuariro = isset($_SESSION["usuario"]) ? $_SESSION["usuario"] : null;
+    if((isset($uNombres) && isset( $uApellidos ) && isset($uUsuariro )) ){
+        header('Location: '.'/diaco-quejas/admin');
+    }
 
 
 $usuario = isset($_POST["usuario"])  ? $_POST["usuario"] : null;
@@ -115,11 +122,11 @@ $contrasenia = isset($_POST["contrasenia"])  ? $_POST["contrasenia"] : null;
                 </form>
                 <br>
                 <?php if(isset($error) && $error){ ?>
-                    <div class="notification is-danger is-light">
-                        <button class="delete"></button>
-                        Usuario/contraseña incorrecta...
-                    </div>
-                    <?php } ?>
+                <div class="notification is-danger is-light">
+                    <button class="delete"></button>
+                    Usuario/contraseña incorrecta...
+                </div>
+                <?php } ?>
             </div>
         </div>
     </div>
