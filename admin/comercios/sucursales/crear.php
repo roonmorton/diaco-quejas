@@ -2,7 +2,6 @@
 include($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/utilidades/Sesion.php');
 $path = 'comercioIndex';
 
-session_start();
 $idComercio = isset($_GET["comercio"]) ? $_GET["comercio"] : '';
 
 

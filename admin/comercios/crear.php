@@ -2,7 +2,6 @@
 include($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/utilidades/Sesion.php');
 $path = 'comercioIndex';
 
-session_start();
 
 if(isset($_POST)){
 	if(isset($_POST["add"]) && $_POST["add"] == "1"){

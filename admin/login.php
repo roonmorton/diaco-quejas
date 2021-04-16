@@ -18,7 +18,6 @@ $contrasenia = isset($_POST["contrasenia"])  ? $_POST["contrasenia"] : null;
   			$u->set(
   				$usuario,
                 $contrasenia
-
   			);
   			if($u->iniciarSesion())
               header('Location: '.'/diaco-quejas/admin');

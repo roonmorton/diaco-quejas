@@ -2,7 +2,6 @@
 include($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/utilidades/Sesion.php');
 $path = 'paisIndex';
 
-session_start();
 $idDepartamento = isset($_GET["departamento"]) ? $_GET["departamento"] : '';
 if (isset($_POST["add"]) && $_POST["add"] == "1" && isset($idDepartamento) && $idDepartamento != "") {
     require_once($_SERVER['DOCUMENT_ROOT'] . '/diaco-quejas/modelos/Municipio.php');

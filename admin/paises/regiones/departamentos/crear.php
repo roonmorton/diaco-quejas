@@ -2,7 +2,6 @@
 include($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/utilidades/Sesion.php');
 $path = 'paisIndex';
 
-session_start();
 $region = isset($_GET["region"]) ? $_GET["region"] : '';
 if (isset($_POST["add"]) && $_POST["add"] == "1" && isset($region) && $region != "") {
     require_once($_SERVER['DOCUMENT_ROOT'] . '/diaco-quejas/modelos/Departamento.php');
