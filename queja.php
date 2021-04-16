@@ -148,7 +148,7 @@ if(isset($laSucursal) && $laSucursal["comercio"] != ""){
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label">NOMBRE </label>
+                    <label class="label">NOMBRE (opcional) </label>
                     <div class="control has-icons-left has-icons-right">
                         <input class="input " type="text" placeholder="Nombre de cliente" autofocus value="" name="pNombre">
                         <span class="icon is-small is-left">
@@ -158,7 +158,7 @@ if(isset($laSucursal) && $laSucursal["comercio"] != ""){
                 </div>
 
                 <div class="field">
-                    <label class="label">TELEFONO </label>
+                    <label class="label">TELEFONO (opcional) </label>
                     <div class="control has-icons-left has-icons-right">
                         <input class="input " type="text" placeholder="Telefono de cliente" value="" name="pTelefono">
                         <span class="icon is-small is-left">
