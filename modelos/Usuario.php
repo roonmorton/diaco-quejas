@@ -1,6 +1,6 @@
 <?php 
 
-require_once($_SERVER['DOCUMENT_ROOT'] .'utilidades/Database.php');
+require_once($_SERVER['DOCUMENT_ROOT'] .'/utilidades/Database.php');
 
 class Usuario{
 
@@ -48,7 +48,7 @@ class Usuario{
         unset($_SESSION["apellidos"]);
         unset($_SESSION["usuario"]);
         session_destroy();
-        header('Location: '.'/diaco-quejas/admin/login.php');
+        header('Location: '.'/admin/login.php');
     }
 
 

@@ -1,32 +1,32 @@
-<?php 
-include($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/utilidades/Sesion.php');
+<?php
+include($_SERVER['DOCUMENT_ROOT'] . '/utilidades/Sesion.php');
 $path = 'comercioIndex';
 
 
-if(isset($_POST)){
-	if(isset($_POST["add"]) && $_POST["add"] == "1"){
-        require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Comercio.php');
-  			$comercio = new Comercio();
-  			$comercio->set(
-  				$_POST["pID"],
-  				$_POST["pNombre"],
-  				$_POST["pTelefono"],
-  				$_POST["pDireccion"],
-  				$_POST["pDescripcion"]
+if (isset($_POST)) {
+    if (isset($_POST["add"]) && $_POST["add"] == "1") {
+        require_once($_SERVER['DOCUMENT_ROOT'] . '/modelos/Comercio.php');
+        $comercio = new Comercio();
+        $comercio->set(
+            $_POST["pID"],
+            $_POST["pNombre"],
+            $_POST["pTelefono"],
+            $_POST["pDireccion"],
+            $_POST["pDescripcion"]
 
-  			);
-  			if($comercio->add())
-  				echo '<script>alert("Comercio agregado Correctamente...");window.location.href = "/diaco-quejas/admin/comercios"; </script>';
-  			else
-              $error = true;
-	}elseif(isset($_POST["edit"]) && $_POST["edit"] == "1"){
-        require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Comercio.php');
-                $comercio = new Comercio();
-                $comercio->id = $_POST["pID"];
-                $comercio->find();
-            }  
-}else{
-    header('Location: '.'/contacts/contacts/');
+        );
+        if ($comercio->add())
+            echo '<script>alert("Comercio agregado Correctamente...");window.location.href = "admin/comercios"; </script>';
+        else
+            $error = true;
+    } elseif (isset($_POST["edit"]) && $_POST["edit"] == "1") {
+        require_once($_SERVER['DOCUMENT_ROOT'] . '/modelos/Comercio.php');
+        $comercio = new Comercio();
+        $comercio->id = $_POST["pID"];
+        $comercio->find();
+    }
+} else {
+    header('Location: ' . '/contacts/contacts/');
 }
 
 ?>
@@ -40,16 +40,14 @@ if(isset($_POST)){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Diaco - Admin</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 </head>
 
 <body class="has-background-light" style="height: 100%;">
-    <?php include('../templates/navbar.php');?>
+    <?php include('../templates/navbar.php'); ?>
     <div class="columns is-desktop">
         <div class="column  is-2  has-background-light">
-            <?php include('../templates/sidenav.php');?>
+            <?php include('../templates/sidenav.php'); ?>
         </div>
         <div class="column is-10 has-background-light" style="border-left: 1px solid #ccc;">
             <!-- Contenido -->
@@ -65,22 +63,19 @@ if(isset($_POST)){
                         </h1>
                     </div>
                     <div class="column is-6 " style="text-align:right;">
-                        <?php if( isset($comercio)) { ?>
-                        <h4 class="is-4" style="font-weight: bold;"> <?php echo $comercio->actualizacion; ?> </h4>
+                        <?php if (isset($comercio)) { ?>
+                            <h4 class="is-4" style="font-weight: bold;"> <?php echo $comercio->actualizacion; ?> </h4>
                         <?php } ?>
                     </div>
                 </div>
                 <div class="box" style="    padding-bottom: 2.5em; padding-top: 2.5em;">
                     <form action="" method="POST">
-                        <input class="input" type="hidden" name="pID"
-                            value="<?php echo isset($comercio) ? $comercio->id : '0'; ?>">
+                        <input class="input" type="hidden" name="pID" value="<?php echo isset($comercio) ? $comercio->id : '0'; ?>">
                         <input class="input" type="hidden" name="add" value="1">
                         <div class="field">
                             <label class="label">NOMBRE *</label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input " type="text" placeholder="Ingresar nombre para el comercio"
-                                    autofocus name="pNombre" required=""
-                                    value="<?php echo isset($comercio) ? $comercio->nombre : ''; ?>">
+                                <input class="input " type="text" placeholder="Ingresar nombre para el comercio" autofocus name="pNombre" required="" value="<?php echo isset($comercio) ? $comercio->nombre : ''; ?>">
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-tag"></i>
                                 </span>
@@ -89,9 +84,7 @@ if(isset($_POST)){
                         <div class="field">
                             <label class="label">TELEFONO </label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input " type="text" placeholder="Ingresar telefono para el comercio"
-                                    autofocus name="pTelefono"
-                                    value="<?php echo isset($comercio) ? $comercio->telefono : ''; ?>">
+                                <input class="input " type="text" placeholder="Ingresar telefono para el comercio" autofocus name="pTelefono" value="<?php echo isset($comercio) ? $comercio->telefono : ''; ?>">
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-phone-square-alt"></i>
                                 </span>
@@ -100,9 +93,7 @@ if(isset($_POST)){
                         <div class="field">
                             <label class="label">DIRECCION </label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input " type="text" placeholder="Ingresar una direccion para el comercio"
-                                    autofocus name="pDireccion"
-                                    value="<?php echo isset($comercio) ? $comercio->direccion : ''; ?>">
+                                <input class="input " type="text" placeholder="Ingresar una direccion para el comercio" autofocus name="pDireccion" value="<?php echo isset($comercio) ? $comercio->direccion : ''; ?>">
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-map-marker-alt"></i>
                                 </span>
@@ -123,12 +114,12 @@ if(isset($_POST)){
                         </button>
                     </form>
                     <br>
-                    <?php if(isset($error) && $error){ ?>
-                    <div class="notification is-danger is-light">
-                        <button class="delete"></button>
-                        <strong>No se guardo el registro</strong>
-                        , intentelo mas tarde...
-                    </div>
+                    <?php if (isset($error) && $error) { ?>
+                        <div class="notification is-danger is-light">
+                            <button class="delete"></button>
+                            <strong>No se guardo el registro</strong>
+                            , intentelo mas tarde...
+                        </div>
                     <?php } ?>
                 </div>
             </div>

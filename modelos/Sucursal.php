@@ -1,7 +1,6 @@
 <?php 
-
-require_once($_SERVER['DOCUMENT_ROOT'] .'utilidades/Database.php');
-
+echo $_SERVER['DOCUMENT_ROOT'].'/utilidades/Database.php';
+require($_SERVER['DOCUMENT_ROOT'].'/utilidades/Database.php');
 class Sucursal {
     public $id;
 	public $nombre;

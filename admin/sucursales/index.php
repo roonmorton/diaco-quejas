@@ -1,7 +1,7 @@
 <?php 
-include($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/utilidades/Sesion.php');
+include($_SERVER['DOCUMENT_ROOT'].'/utilidades/Sesion.php');
 $path = 'sucursalReporte';
-require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Reportes.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/modelos/Reportes.php');
 
 
 $busqueda = isset($_GET["busqueda"]) ? $_GET["busqueda"] : "";
@@ -113,7 +113,7 @@ $reporte = new Reporte();
             </div>
         </div>
     </div>
-    <script src="/diaco-quejas/admin/recursos/js/funciones.js"></script>
+    <script src="/admin/recursos/js/funciones.js"></script>
 </body>
 
 </html>

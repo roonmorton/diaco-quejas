@@ -1,10 +1,10 @@
 <?php
-include($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/utilidades/Sesion.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/utilidades/Sesion.php');
 $path = 'paisIndex';
 
 $region = isset($_GET["region"]) ? $_GET["region"] : '';
 if (isset($_POST["add"]) && $_POST["add"] == "1" && isset($region) && $region != "") {
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/diaco-quejas/modelos/Departamento.php');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/modelos/Departamento.php');
     $departamento = new Departamento();
     $departamento->set(
         $_POST["pID"],
@@ -12,11 +12,11 @@ if (isset($_POST["add"]) && $_POST["add"] == "1" && isset($region) && $region !=
         $region
     );
     if ($departamento->add())
-        echo "<script>alert('Departamento agregado Correctamente...');window.location.href = '/diaco-quejas/admin/paises/regiones/departamentos/?region=$region'; </script>";
+        echo "<script>alert('Departamento agregado Correctamente...');window.location.href = '/admin/paises/regiones/departamentos/?region=$region'; </script>";
     else
         $error = true;
 } elseif (isset($_POST["edit"]) && $_POST["edit"] == "1") {
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/diaco-quejas/modelos/Departamento.php');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/modelos/Departamento.php');
     $departamento = new Departamento();
     $departamento->id = $_POST["pID"];
     $departamento->find();
@@ -24,11 +24,10 @@ if (isset($_POST["add"]) && $_POST["add"] == "1" && isset($region) && $region !=
 
 
 if (isset($region) && $region != "") {
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/diaco-quejas/modelos/Pais.php');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/modelos/Pais.php');
     $pais = new Pais();
     $pais->idPaisRegion = $region;
     $pais->findPaisDeRegion();
-
 }
 
 
@@ -115,7 +114,7 @@ if (isset($region) && $region != "") {
             </div>
         </div>
     </div>
-    <script src="./recursos/js/funciones.js"></script>
+    <script src="/admin/recursos/js/funciones.js"></script>
 </body>
 
 </html>

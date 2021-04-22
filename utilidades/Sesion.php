@@ -10,7 +10,7 @@
     
 
     if((!isset($uNombres) && !isset( $uApellidos ) && !isset($uUsuariro )) || ( $salir == '1')){
-        require_once($_SERVER['DOCUMENT_ROOT'].'modelos/Usuario.php');
+        require_once($_SERVER['DOCUMENT_ROOT'].'/modelos/Usuario.php');
   	    $u = new Usuario();
         $u-> cerrarSesion();
     }

@@ -1,7 +1,7 @@
 <?php
-include($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/utilidades/Sesion.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/utilidades/Sesion.php');
 $path = 'paisIndex';
-require_once($_SERVER['DOCUMENT_ROOT'] . '/diaco-quejas/modelos/Pais.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/modelos/Pais.php');
 
 
 
@@ -18,13 +18,13 @@ if (isset($_GET["pais"]) && $_GET["pais"] != "") {
             if (!isset($idRegionPais) || $idRegionPais == '') {
                 if ($pais->addPaisRegion($idRegion)) {
                     echo '<script>window.location.href = ""; </script>';
-                }else{
+                } else {
                     echo '<script>alert("No se pudo agregar la region...");window.location.href = ""; </script>';
                 }
             } else {
                 if ($pais->eliminarPaisRegion($idRegion)) {
                     echo '<script>window.location.href = ""; </script>';
-                }else{
+                } else {
                     echo '<script>alert("Region no se pudo eliminar...");window.location.href = ""; </script>';
                 }
             }
@@ -67,7 +67,6 @@ if (isset($_GET["pais"]) && $_GET["pais"] != "") {
         </div>
         <div class="column is-10 has-background-light" style="border-left: 1px solid #ccc;">
             <!-- Contenido -->
-
             <div class="container" style="padding: 2em  0;">
                 <div class="columns is-desktop">
                     <div class="column is-6 ">
@@ -81,23 +80,7 @@ if (isset($_GET["pais"]) && $_GET["pais"] != "") {
                     <div class="column is-6 " style="text-align:right;">
                     </div>
                 </div>
-
-
                 <div class="">
-
-                    <!-- <form action="" method="GET" style="padding: 1em 0;">
-                        <input class="input" type="hidden" name="pais" value="<?php echo isset($idPais) ? $idPais : ''; ?>" />
-
-                        <div class="field has-addons ">
-                            <div class="control  is-expanded">
-                                <input class="input" type="text" placeholder="Ingresar terminos de busqueda" autofocus name="busqueda" value="<?php echo isset($busqueda) ? $busqueda : ''; ?>" />
-                            </div>
-                            <div class="control">
-                                <input class="button is-danger" value="Buscar" type="submit">
-                            </div>
-                        </div>
-                    </form> -->
-
                 </div>
                 <div class="box">
                     <table class="table is-striped is-hoverable is-fullwidth">
@@ -134,10 +117,7 @@ if (isset($_GET["pais"]) && $_GET["pais"] != "") {
                                             <?php echo $value["creacion"]; ?>
                                         </td>
                                         <td>
-
-
                                             <form method="POST" action="" style="padding-right: .2em; margin-bottom: 0">
-                                                <!-- <input type="hidden" name="pIdPais" value="<?php echo $value['idPais']; ?>" /> -->
                                                 <input type="hidden" name="pIdRegion" value="<?php echo $value['idRegion']; ?>" />
                                                 <input type="hidden" name="pIdPaisRegion" value="<?php echo $value['idPais_Region']; ?>" />
 
@@ -151,29 +131,8 @@ if (isset($_GET["pais"]) && $_GET["pais"] != "") {
                                         </td>
                                         <td>
                                             <div class="buttons are-small">
-
-                                                <!-- <form method="POST" action="" style="padding-right: .2em; margin-bottom: 0">
-                                            <input type="hidden" name="pID" value="<?php echo $value['idPais']; ?>" />
-                                            <input type="hidden" name="del" value="1" />
-                                            <button class="button is-danger is-outlined" title="Eliminar" type="submit"
-                                                onclick="return confirm('Esta seguro de eliminar el registro?');">
-                                                <span class="icon is-small ">
-                                                    <i class="fas fa-trash"></i>
-                                                </span>
-                                            </button>
-                                        </form>
-
-                                        <form method="POST" action="crear.php"
-                                            style="padding-right: .2em; margin-bottom: 0">
-                                            <input type="hidden" name="pID" value="<?php echo $value['idPais']; ?>" />
-                                            <input class="input" type="hidden" name="edit" value="1" />
-                                            <button class="button is-link is-outlined" title="Actualizar">
-                                                <span class="icon is-small">
-                                                    <i class="fas fa-edit"></i>
-                                                </span></button>
-                                        </form> -->
                                                 <?php if (isset($value['idPais_Region']) && $value['idPais_Region'] != '') { ?>
-                                                    <a href="/diaco-quejas/admin/paises/regiones/departamentos/?region=<?php echo $value['idPais_Region']; ?>" class="button is-link is-outlined" title="Departamentos">
+                                                    <a href="/admin/paises/regiones/departamentos/?region=<?php echo $value['idPais_Region']; ?>" class="button is-link is-outlined" title="Departamentos">
                                                         <span class="icon is-small">
                                                             <i class="fas fa-map-marked-alt"></i>
                                                         </span></a>
@@ -214,7 +173,7 @@ if (isset($_GET["pais"]) && $_GET["pais"] != "") {
 
         });
     </script>
-    <script src="/diaco-quejas/admin/recursos/js/funciones.js"></script>
+    <script src="/admin/recursos/js/funciones.js"></script>
 </body>
 
 </html>

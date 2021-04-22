@@ -4,7 +4,7 @@ $path = 'quejaReporte';
 
 
 
-require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Sucursal.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/modelos/Sucursal.php');
 
 $idSucursal = isset($_GET["sucursal"]) ? $_GET["sucursal"] : "";
 
@@ -17,7 +17,7 @@ if($idSucursal != ''){
 if(isset($laSucursal) && $laSucursal["comercio"] != ""){
 
 	if(isset($_POST["add"]) && $_POST["add"] == "1"){
-        require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Queja.php');
+        require_once($_SERVER['DOCUMENT_ROOT'].'/modelos/Queja.php');
   			$queja = new Queja();
   			$queja->set(
   				0,
@@ -29,7 +29,7 @@ if(isset($laSucursal) && $laSucursal["comercio"] != ""){
 
   			);
   			if($queja->add())
-  				echo '<script>alert("Queja registrada Correctamente...");window.location.href = "/diaco-quejas/"; </script>';
+  				echo '<script>alert("Queja registrada Correctamente...");window.location.href = "/"; </script>';
   			else
               $error = true;
 	} 

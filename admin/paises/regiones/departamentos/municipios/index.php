@@ -1,39 +1,29 @@
 <?php
-include($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/utilidades/Sesion.php');
+
+
+include($_SERVER['DOCUMENT_ROOT'] . '/utilidades/Sesion.php');
 $path = 'paisIndex';
-require_once($_SERVER['DOCUMENT_ROOT'] . '/diaco-quejas/modelos/Departamento.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/modelos/Departamento.php');
 
 
 
 if (isset($_GET["departamento"]) && $_GET["departamento"] != "") {
     $idDepartamento = $_GET['departamento'];
-    /* $pais = new Pais();
-    $pais->idPaisRegion = $idRegion;
-    $pais->findPaisDeRegion(); */
 
     $departamento = new Departamento();
     $departamento->id = $idDepartamento;
     $departamento->findPaisDeDepartamento();
 
     if (isset($_POST["del"]) && $_POST["del"] == "1") {
-        require_once($_SERVER['DOCUMENT_ROOT'] . '/diaco-quejas/modelos/Municipio.php');
+        require_once($_SERVER['DOCUMENT_ROOT'] . '//modelos/Municipio.php');
         $Municipio = new Municipio();
         $Municipio->id = $_POST["pID"];
         if ($Municipio->delete()) {
             echo '<script>alert("Municipio eliminado Correctamente...");window.location.href = ""; </script>';
-        }else{
+        } else {
             echo '<script>alert("Municipio no se pudo eliminar...");window.location.href = ""; </script>';
         }
-    } /* else {
-        $pais = new Pais();
-        if (isset($_GET["busqueda"]) && $_GET["busqueda"] != "") {
-            $busqueda = $_GET['busqueda'];
-            $listaPaises = $pais->busqueda($busqueda);
-        } else {
-            $listaPaises = $pais->list();
-        }
-    } */
-
+    }
 
 
     if (isset($_GET["busqueda"]) && $_GET["busqueda"] != "") {
@@ -97,22 +87,7 @@ if (isset($_GET["departamento"]) && $_GET["departamento"] != "") {
                         <?php } ?>
                     </div>
                 </div>
-
-
                 <div class="">
-
-                    <!-- <form action="" method="GET" style="padding: 1em 0;">
-                        <input class="input" type="hidden" name="departamento" value="<?php echo isset($idDepartamento) ? $idDepartamento : ''; ?>" />
-                        <div class="field has-addons ">
-                            <div class="control  is-expanded">
-                                <input class="input" type="text" placeholder="Ingresar terminos de busqueda" autofocus name="busqueda" value="<?php echo isset($busqueda) ? $busqueda : ''; ?>" />
-                            </div>
-                            <div class="control">
-                                <input class="button is-danger" value="Buscar" type="submit">
-                            </div>
-                        </div>
-                    </form> -->
-
                 </div>
                 <div class="box">
                     <table class="table is-striped is-hoverable is-fullwidth">
@@ -165,12 +140,6 @@ if (isset($_GET["departamento"]) && $_GET["departamento"] != "") {
                                                             <i class="fas fa-edit"></i>
                                                         </span></button>
                                                 </form>
-                                               <!--  <?php if (isset($value['idMunicipio']) && $value['idMunicipio'] != '') { ?>
-                                                    <a href="/diaco-quejas/admin/paises/regiones/departamentos/municipios/?departamento=<?php echo $value['idMunicipio']; ?>" class="button is-link is-outlined" title="Municipios">
-                                                        <span class="icon is-small">
-                                                            <i class="fas fa-map-marked-alt"></i>
-                                                        </span></a>
-                                                <?php } ?> -->
                                             </div>
                                         </td>
                                     </tr>
@@ -190,24 +159,7 @@ if (isset($_GET["departamento"]) && $_GET["departamento"] != "") {
         </div>
     </div>
 
-    <script>
-        /*  document.addEventListener('DOMContentLoaded', () => {
-            const $checkboxes = Array.prototype.slice.call(document.querySelectorAll('#checkedRegion'), 0);
-            if ($checkboxes.length > 0) {
-                $checkboxes.forEach(el => {
-                    el.addEventListener('click', (event) => {
-                        event.preventDefault();
-                        if (confirm('Actualizar el registro registro?')) {
-                            el.parentNode.parentNode.submit()
-                        }
-                    });
-                });
-            }
-
-
-        }); */
-    </script>
-    <script src="/diaco-quejas/admin/recursos/js/funciones.js"></script>
+    <script src="/admin/recursos/js/funciones.js"></script>
 </body>
 
 </html>

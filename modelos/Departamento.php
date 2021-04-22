@@ -1,6 +1,6 @@
 <?php 
 
-require_once($_SERVER['DOCUMENT_ROOT'] .'utilidades/Database.php');
+require_once($_SERVER['DOCUMENT_ROOT'] .'/utilidades/Database.php');
 
 class Departamento {
     public $id;

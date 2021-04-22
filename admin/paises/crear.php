@@ -1,12 +1,12 @@
 <?php 
-include($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/utilidades/Sesion.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/utilidades/Sesion.php');
 $path = 'paisIndex';
 
 session_start();
 
 if(isset($_POST)){
 	if(isset($_POST["add"]) && $_POST["add"] == "1"){
-        require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Pais.php');
+        require_once($_SERVER['DOCUMENT_ROOT'] . '/modelos/Pais.php');
   			$pais = new Pais();
   			$pais->set(
   				$_POST["pID"],
@@ -14,11 +14,11 @@ if(isset($_POST)){
   				$_POST["pIsoCode"]
   			);
   			if($pais->add())
-  				echo '<script>alert("Pais agregado Correctamente...");window.location.href = "/diaco-quejas/admin/paises"; </script>';
+  				echo '<script>alert("Pais agregado Correctamente...");window.location.href = "/admin/paises"; </script>';
   			else
               $error = true;
 	}elseif(isset($_POST["edit"]) && $_POST["edit"] == "1"){
-        require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Pais.php');
+        require_once($_SERVER['DOCUMENT_ROOT'] . '/modelos/Pais.php');
                 $pais = new Pais();
                 $pais->id = $_POST["pID"];
                 $pais->find();
@@ -113,7 +113,7 @@ if(isset($_POST)){
             </div>
         </div>
     </div>
-    <script src="./recursos/js/funciones.js"></script>
+    <script src="/admin/recursos/js/funciones.js"></script>
 </body>
 
 </html>

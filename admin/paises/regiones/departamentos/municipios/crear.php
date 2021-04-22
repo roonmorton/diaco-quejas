@@ -1,10 +1,10 @@
 <?php
-include($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/utilidades/Sesion.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/utilidades/Sesion.php');
 $path = 'paisIndex';
 
 $idDepartamento = isset($_GET["departamento"]) ? $_GET["departamento"] : '';
 if (isset($_POST["add"]) && $_POST["add"] == "1" && isset($idDepartamento) && $idDepartamento != "") {
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/diaco-quejas/modelos/Municipio.php');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/modelos/Municipio.php');
     $municipio = new Municipio();
     $municipio->set(
         $_POST["pID"],
@@ -13,11 +13,11 @@ if (isset($_POST["add"]) && $_POST["add"] == "1" && isset($idDepartamento) && $i
         $_POST["pZipCode"]
     );
     if ($municipio->add())
-        echo "<script>alert('Municipio agregado Correctamente...');window.location.href = '/diaco-quejas/admin/paises/regiones/departamentos/municipios?departamento=$idDepartamento'; </script>";
+        echo "<script>alert('Municipio agregado Correctamente...');window.location.href = '/admin/paises/regiones/departamentos/municipios?departamento=$idDepartamento'; </script>";
     else
         $error = true;
 } elseif (isset($_POST["edit"]) && $_POST["edit"] == "1") {
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/diaco-quejas/modelos/Municipio.php');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/modelos/Municipio.php');
     $municipio = new Municipio();
     $municipio->id = $_POST["pID"];
     $municipio->find();
@@ -25,11 +25,10 @@ if (isset($_POST["add"]) && $_POST["add"] == "1" && isset($idDepartamento) && $i
 
 
 if (isset($idDepartamento) && $idDepartamento != "") {
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/diaco-quejas/modelos/Departamento.php');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/modelos/Departamento.php');
     $departamento = new Departamento();
     $departamento->id = $idDepartamento;
     $departamento->findPaisDeDepartamento();
-
 }
 
 
@@ -125,7 +124,7 @@ if (isset($idDepartamento) && $idDepartamento != "") {
             </div>
         </div>
     </div>
-    <script src="./recursos/js/funciones.js"></script>
+    <script src="/admin/recursos/js/funciones.js"></script>
 </body>
 
 </html>

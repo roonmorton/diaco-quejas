@@ -6,21 +6,21 @@ session_start();
     $uApellidos = isset($_SESSION["apellidos"]) ? $_SESSION["apellidos"] : null;
     $uUsuariro = isset($_SESSION["usuario"]) ? $_SESSION["usuario"] : null;
     if((isset($uNombres) && isset( $uApellidos ) && isset($uUsuariro )) ){
-        header('Location: '.'admin');
+        header('Location: '.'/admin');
     }
 
 
 $usuario = isset($_POST["usuario"])  ? $_POST["usuario"] : null;
 $contrasenia = isset($_POST["contrasenia"])  ? $_POST["contrasenia"] : null;
 	if($usuario != null && $contrasenia != null){
-        require_once($_SERVER['DOCUMENT_ROOT'].'modelos/Usuario.php');
+        require_once($_SERVER['DOCUMENT_ROOT'].'/modelos/Usuario.php');
   			$u = new Usuario();
   			$u->set(
   				$usuario,
                 $contrasenia
   			);
   			if($u->iniciarSesion())
-              header('Location: '.'admin');
+              header('Location: '.'/admin');
   			else
               $error = true;
 	} 

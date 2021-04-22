@@ -1,6 +1,6 @@
 <?php 
 
-require_once($_SERVER['DOCUMENT_ROOT'] .'utilidades/Database.php');
+require_once($_SERVER['DOCUMENT_ROOT'] .'/utilidades/Database.php');
 
 class Reporte {
 
@@ -19,7 +19,7 @@ class Reporte {
 		(select count(1) as regiones from Region) as region,
 		(select count(1) as quejas from Queja) as queja';
 		$result = $this->db->queryResult($query);
-		$res; 
+		$res = null; 
 		if(isset($result) && count($result) >  0   ){ 
 			$res = $result[0];
 		   }

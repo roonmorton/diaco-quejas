@@ -1,7 +1,7 @@
 <?php
-include($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/utilidades/Sesion.php');
+include($_SERVER['DOCUMENT_ROOT'] . '/utilidades/Sesion.php');
 $path = 'paisIndex';
-require_once($_SERVER['DOCUMENT_ROOT'] . '/diaco-quejas/modelos/Pais.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/modelos/Pais.php');
 
 
 
@@ -12,24 +12,15 @@ if (isset($_GET["region"]) && $_GET["region"] != "") {
     $pais->findPaisDeRegion();
 
     if (isset($_POST["del"]) && $_POST["del"] == "1") {
-        require_once($_SERVER['DOCUMENT_ROOT'] . '/diaco-quejas/modelos/Departamento.php');
+        require_once($_SERVER['DOCUMENT_ROOT'] . '/modelos/Departamento.php');
         $departamento = new Departamento();
         $departamento->id = $_POST["pID"];
         if ($departamento->delete()) {
             echo '<script>alert("Departamento eliminado Correctamente...");window.location.href = ""; </script>';
-        }else{
+        } else {
             echo '<script>alert("Departamento no se pudo eliminar...");window.location.href = ""; </script>';
         }
-    } /* else {
-        $pais = new Pais();
-        if (isset($_GET["busqueda"]) && $_GET["busqueda"] != "") {
-            $busqueda = $_GET['busqueda'];
-            $listaPaises = $pais->busqueda($busqueda);
-        } else {
-            $listaPaises = $pais->list();
-        }
-    } */
-
+    } 
 
 
     if (isset($_GET["busqueda"]) && $_GET["busqueda"] != "") {
@@ -78,7 +69,7 @@ if (isset($_GET["region"]) && $_GET["region"] != "") {
                             <span class="icon ">
                                 <i class="fas fa-globe"></i>
                             </span>
-                            <span><?php echo isset($pais) && isset($pais->isoCode)? $pais->nombreRegion : 'Region no valida'; ?> de <?php echo isset($pais) && isset($pais->isoCode) ? $pais->nombre : 'Pais no valido'; ?> </span>
+                            <span><?php echo isset($pais) && isset($pais->isoCode) ? $pais->nombreRegion : 'Region no valida'; ?> de <?php echo isset($pais) && isset($pais->isoCode) ? $pais->nombre : 'Pais no valido'; ?> </span>
                         </h2>
 
                     </div>
@@ -162,7 +153,7 @@ if (isset($_GET["region"]) && $_GET["region"] != "") {
                                                         </span></button>
                                                 </form>
                                                 <?php if (isset($value['idDepartamento']) && $value['idDepartamento'] != '') { ?>
-                                                    <a href="/diaco-quejas/admin/paises/regiones/departamentos/municipios/?departamento=<?php echo $value['idDepartamento']; ?>" class="button is-link is-outlined" title="Municipios">
+                                                    <a href="/admin/paises/regiones/departamentos/municipios/?departamento=<?php echo $value['idDepartamento']; ?>" class="button is-link is-outlined" title="Municipios">
                                                         <span class="icon is-small">
                                                             <i class="fas fa-map-marked-alt"></i>
                                                         </span></a>
@@ -186,24 +177,7 @@ if (isset($_GET["region"]) && $_GET["region"] != "") {
         </div>
     </div>
 
-    <script>
-        /*  document.addEventListener('DOMContentLoaded', () => {
-            const $checkboxes = Array.prototype.slice.call(document.querySelectorAll('#checkedRegion'), 0);
-            if ($checkboxes.length > 0) {
-                $checkboxes.forEach(el => {
-                    el.addEventListener('click', (event) => {
-                        event.preventDefault();
-                        if (confirm('Actualizar el registro registro?')) {
-                            el.parentNode.parentNode.submit()
-                        }
-                    });
-                });
-            }
-
-
-        }); */
-    </script>
-    <script src="/diaco-quejas/admin/recursos/js/funciones.js"></script>
+    <script src="/admin/recursos/js/funciones.js"></script>
 </body>
 
 </html>
