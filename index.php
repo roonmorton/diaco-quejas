@@ -1,9 +1,6 @@
 <?php 
 
-
-require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Sucursal.php');
-/* require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Reportes.php'); */
-
+require_once($_SERVER['DOCUMENT_ROOT'].'modelos/Sucursal.php');
 $busqueda = isset($_GET["busqueda"]) ? $_GET["busqueda"]: '';
 
 $sucursal = new Sucursal();

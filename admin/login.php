@@ -6,21 +6,21 @@ session_start();
     $uApellidos = isset($_SESSION["apellidos"]) ? $_SESSION["apellidos"] : null;
     $uUsuariro = isset($_SESSION["usuario"]) ? $_SESSION["usuario"] : null;
     if((isset($uNombres) && isset( $uApellidos ) && isset($uUsuariro )) ){
-        header('Location: '.'/diaco-quejas/admin');
+        header('Location: '.'admin');
     }
 
 
 $usuario = isset($_POST["usuario"])  ? $_POST["usuario"] : null;
 $contrasenia = isset($_POST["contrasenia"])  ? $_POST["contrasenia"] : null;
 	if($usuario != null && $contrasenia != null){
-        require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Usuario.php');
+        require_once($_SERVER['DOCUMENT_ROOT'].'modelos/Usuario.php');
   			$u = new Usuario();
   			$u->set(
   				$usuario,
                 $contrasenia
   			);
   			if($u->iniciarSesion())
-              header('Location: '.'/diaco-quejas/admin');
+              header('Location: '.'admin');
   			else
               $error = true;
 	} 
@@ -71,7 +71,7 @@ $contrasenia = isset($_POST["contrasenia"])  ? $_POST["contrasenia"] : null;
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
-                            <a class="button  is-info is-light" href="/diaco-quejas">
+                            <a class="button  is-info is-light" href="/">
                                 <strong>Salir</strong>
                             </a>
                         </div>

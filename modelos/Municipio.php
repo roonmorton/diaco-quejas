@@ -1,6 +1,6 @@
 <?php 
 
-require_once($_SERVER['DOCUMENT_ROOT'] .'/diaco-quejas/utilidades/Database.php');
+require_once($_SERVER['DOCUMENT_ROOT'] .'utilidades/Database.php');
 
 class Municipio {
     public $id;

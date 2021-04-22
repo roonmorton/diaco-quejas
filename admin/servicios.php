@@ -5,14 +5,14 @@ if($_GET){
     $idDepartamento = isset($_GET["idDepartamento"]) && $_GET["idDepartamento"] != "" ? $_GET["idDepartamento"] : '';
 
     if($idPais != ''){
-    require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Pais.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'modelos/Pais.php');
     $pais = new Pais();
     $pais->id = $idPais;
     $list =  $pais->departamentosDePais('');
     header('Content-type: application/json');
     echo json_encode( $list );
     }else if($idDepartamento != ''){
-        require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Departamento.php');
+        require_once($_SERVER['DOCUMENT_ROOT'].'modelos/Departamento.php');
     $departamento = new Departamento();
     $departamento->id = $idDepartamento;
     $list =  $departamento->municipiosDeDepartamento('');

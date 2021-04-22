@@ -1,11 +1,11 @@
 <?php 
-include($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/utilidades/Sesion.php');
+include($_SERVER['DOCUMENT_ROOT'].'utilidades/Sesion.php');
 
 $path = 'adminIndex';
 
 
-require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Queja.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'/diaco-quejas/modelos/Reportes.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'modelos/Queja.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'modelos/Reportes.php');
 
 $queja = new Queja();
     $quejas = $queja->cantidadQuejasUnMes();
