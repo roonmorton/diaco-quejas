@@ -59,7 +59,7 @@ if(isset($laSucursal) && $laSucursal["comercio"] != ""){
     <nav class="navbar is-danger " role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
-                <a class="navbar-item" href="https://bulma.io">
+                <a class="navbar-item" href="">
                     <h2 class="subtitle is-family-secondary ">
                         <strong style="color: #fff">
                             Diaco - Quejas

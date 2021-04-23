@@ -1,6 +1,6 @@
-<?php 
-echo $_SERVER['DOCUMENT_ROOT']. '/modelos/Sucursal.php' . '<br>';
-require ('./modelos/Sucursal.php');
+<?php
+
+require_once($_SERVER['DOCUMENT_ROOT'] . '/modelos/Sucursal.php');
 $busqueda = isset($_GET["busqueda"]) ? $_GET["busqueda"] : '';
 $sucursal = new Sucursal();
 $sucursales = $sucursal->resumenSucursales($busqueda);
@@ -24,7 +24,7 @@ $sucursales = $sucursal->resumenSucursales($busqueda);
     <nav class="navbar is-danger " role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
-                <a class="navbar-item" href="https://bulma.io">
+                <a class="navbar-item" href="">
                     <h2 class="subtitle is-family-secondary ">
                         <strong style="color: #fff">
                             Diaco - Quejas

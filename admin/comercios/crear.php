@@ -16,7 +16,7 @@ if (isset($_POST)) {
 
         );
         if ($comercio->add())
-            echo '<script>alert("Comercio agregado Correctamente...");window.location.href = "admin/comercios"; </script>';
+            echo '<script>alert("Comercio agregado Correctamente...");window.location.href = "/admin/comercios"; </script>';
         else
             $error = true;
     } elseif (isset($_POST["edit"]) && $_POST["edit"] == "1") {

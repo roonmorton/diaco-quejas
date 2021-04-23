@@ -1,18 +1,17 @@
-<?php 
-    if(session_status() != 2)
-        session_start();
+<?php
 
 
-        $uNombres = !empty($_SESSION["nombres"]) ? $_SESSION["nombres"] : null;
-        $uApellidos = !empty($_SESSION["apellidos"]) ? $_SESSION["apellidos"] : null;
-        $uUsuariro = !empty($_SESSION["usuario"]) ? $_SESSION["usuario"] : null;
-        $salir = !empty($_POST['salir']) ? $_POST['salir'] : '0' ;
-    
+if (session_status() != 2) {
+    session_start();
+}
 
-    if((!isset($uNombres) && !isset( $uApellidos ) && !isset($uUsuariro )) || ( $salir == '1')){
-        require_once($_SERVER['DOCUMENT_ROOT'].'/modelos/Usuario.php');
-  	    $u = new Usuario();
-        $u-> cerrarSesion();
-    }
-
-?>
+$uNombres = isset($_SESSION["nombres"]) ? $_SESSION["nombres"] : null;
+$uApellidos = isset($_SESSION["apellidos"]) ? $_SESSION["apellidos"] : null;
+$uUsuariro = isset($_SESSION["usuario"]) ? $_SESSION["usuario"] : null;
+$salir = isset($_POST['salir']) ? $_POST['salir'] : '0';
+if ((!isset($uNombres) && !isset($uApellidos) && !isset($uUsuariro)) || ($salir == '1')) {
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/modelos/Usuario.php');
+    $u = new Usuario();
+    $u->cerrarSesion();
+    header('Location: '.'/admin/login.php');
+}

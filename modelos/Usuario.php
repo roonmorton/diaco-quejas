@@ -1,6 +1,6 @@
 <?php 
 
-require_once($_SERVER['DOCUMENT_ROOT'] .'/utilidades/Database.php');
+require_once($_SERVER['DOCUMENT_ROOT'] .'/utilidades/DataBase.php');
 
 class Usuario{
 
@@ -31,6 +31,7 @@ class Usuario{
         $query = "select * from Usuario where upper(correo)= upper('$this->usuario') and contrasenia = md5('$this->contrasenia')";
 		$result = $this->db->queryResult($query);
         $res = false;
+
 		if(count($result) > 0){
 			$result = $result[0];
 			session_start();
@@ -48,7 +49,6 @@ class Usuario{
         unset($_SESSION["apellidos"]);
         unset($_SESSION["usuario"]);
         session_destroy();
-        header('Location: '.'/admin/login.php');
     }
 
 
