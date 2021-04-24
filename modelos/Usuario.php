@@ -37,12 +37,12 @@ class Usuario
 
         if (count($result) > 0) {
             $result = $result[0];
-            session_start();
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
             $_SESSION["nombres"] = $result['nombres'];
             $_SESSION["apellidos"] = $result['apellidos'];
             $_SESSION["usuario"] = $result['correo'];
-            var_dump($_SESSION);
-            echo "<br>";
             $res = true;
         }
         $this->db->close();
@@ -51,9 +51,7 @@ class Usuario
 
     public function cerrarSesion()
     {
-        unset($_SESSION["nombres"]);
-        unset($_SESSION["apellidos"]);
-        unset($_SESSION["usuario"]);
+        session_unset();
         session_destroy();
     }
 
@@ -62,5 +60,27 @@ class Usuario
     public function __destroy()
     {
         $this->db->close();
+    }
+
+
+    function my_session_regenerate_id($id) {
+        // Call session_create_id() while session is active to 
+        // make sure collision free.
+        if (session_status() != PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+        // WARNING: Never use confidential strings for prefix!
+        $newid = session_create_id('myprefix-'. $id);
+        // Set deleted timestamp. Session data must not be deleted immediately for reasons.
+        $_SESSION['deleted_time'] = time();
+        // Finish session
+        session_commit();
+        // Make sure to accept user defined session ID
+        // NOTE: You must enable use_strict_mode for normal operations.
+        ini_set('session.use_strict_mode', 0);
+        // Set new custom session ID
+        session_id($newid);
+        // Start with custom session ID
+        session_start();
     }
 }

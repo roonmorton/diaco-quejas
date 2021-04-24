@@ -15,9 +15,10 @@ if (isset($_POST)) {
             $_POST["pDescripcion"]
 
         );
-        if ($comercio->add())
+        if ($comercio->add()) {
             echo '<script>alert("Comercio agregado Correctamente...");window.location.href = "/admin/comercios"; </script>';
-        else
+            exit();
+        } else
             $error = true;
     } elseif (isset($_POST["edit"]) && $_POST["edit"] == "1") {
         require_once($_SERVER['DOCUMENT_ROOT'] . '/modelos/Comercio.php');
@@ -26,7 +27,9 @@ if (isset($_POST)) {
         $comercio->find();
     }
 } else {
+    header_remove();
     header('Location: ' . '/contacts/contacts/');
+    exit();
 }
 
 ?>

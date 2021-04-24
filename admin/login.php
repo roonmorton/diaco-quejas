@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 $path = 'quejaReporte';
 
 $uNombres = isset($_SESSION["nombres"]) ? $_SESSION["nombres"] : null;
@@ -22,15 +20,12 @@ if ($usuario != null && $contrasenia != null) {
         $contrasenia
     );
     if ($u->iniciarSesion()) {
-        var_dump($_SESSION); 
-       // header('Location: ' . '/admin');
-        /* var_dump($_SESSION); */
+        header('Location: ' . '/admin');
+        exit();
     } else {
         $error = true;
     }
 }
-
-
 
 ?>
 

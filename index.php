@@ -1,5 +1,7 @@
 <?php
 
+phpinfo();
+ 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/modelos/Sucursal.php');
 $busqueda = isset($_GET["busqueda"]) ? $_GET["busqueda"] : '';
 $sucursal = new Sucursal();
