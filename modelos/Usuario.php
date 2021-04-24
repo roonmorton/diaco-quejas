@@ -1,50 +1,56 @@
-<?php 
+<?php
 
-require_once($_SERVER['DOCUMENT_ROOT'] .'/utilidades/DataBase.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/utilidades/DataBase.php');
 
-class Usuario{
+class Usuario
+{
 
     public $id;
     public $usuario;
-    public $contrasenia; 
-    public $nombres; 
+    public $contrasenia;
+    public $nombres;
     public $apellidos;
 
- 
-	private $db;
 
-	function __construct(){
-		$this->db = new DataBase();
-		$this->id = 0;
-	}
-    
-    public function set (
-		$usuario,
-		$contrasenia
-	){
-		$this->usuario = $usuario;
-		$this->contrasenia = $contrasenia;
-	}
+    private $db;
+
+    function __construct()
+    {
+        $this->db = new DataBase();
+        $this->id = 0;
+    }
+
+    public function set(
+        $usuario,
+        $contrasenia
+    ) {
+        $this->usuario = $usuario;
+        $this->contrasenia = $contrasenia;
+    }
 
 
-    public function iniciarSesion(){
+    public function iniciarSesion()
+    {
         $query = "select * from Usuario where upper(correo)= upper('$this->usuario') and contrasenia = md5('$this->contrasenia')";
-		$result = $this->db->queryResult($query);
+        $result = $this->db->queryResult($query);
         $res = false;
 
-		if(count($result) > 0){
-			$result = $result[0];
-			session_start();
+        if (count($result) > 0) {
+            $result = $result[0];
+            session_start();
             $_SESSION["nombres"] = $result['nombres'];
             $_SESSION["apellidos"] = $result['apellidos'];
             $_SESSION["usuario"] = $result['correo'];
+            var_dump($_SESSION);
+            echo "<br>";
             $res = true;
-		}
-		$this->db->close();
+        }
+        $this->db->close();
         return $res;
     }
 
-    public function cerrarSesion(){
+    public function cerrarSesion()
+    {
         unset($_SESSION["nombres"]);
         unset($_SESSION["apellidos"]);
         unset($_SESSION["usuario"]);
@@ -52,12 +58,9 @@ class Usuario{
     }
 
 
-       
-	public function __destroy(){
+
+    public function __destroy()
+    {
         $this->db->close();
     }
-    
 }
-
-
-?>

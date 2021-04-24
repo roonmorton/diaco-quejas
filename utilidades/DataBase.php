@@ -3,15 +3,15 @@
 
 class DataBase{
 
-	/* private $user="uwq5bha6eudzxzui";
+	private $user="uwq5bha6eudzxzui";
 	private $pass="m3IePasyAZZsHJ9EEung";
 	private $host="bvvzaqa05oaftfot1xt5-mysql.services.clever-cloud.com";
-	private $db="bvvzaqa05oaftfot1xt5"; */
-
+	private $db="bvvzaqa05oaftfot1xt5";
+/* 
     private $user="3817675_diaco";
 	private $pass="aUaKdC6z5:%7@+HJ";
 	private $host="fdb30.atspace.me";
-	private $db="3817675_diaco";
+	private $db="3817675_diaco"; */
 	private $con;
 
     function __construct(){

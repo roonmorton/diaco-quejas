@@ -22,10 +22,10 @@ if ($usuario != null && $contrasenia != null) {
         $contrasenia
     );
     if ($u->iniciarSesion()) {
-        header('Location: ' . '/admin');
+        var_dump($_SESSION); 
+       // header('Location: ' . '/admin');
         /* var_dump($_SESSION); */
     } else {
-        var_dump("sesion invalida");
         $error = true;
     }
 }
