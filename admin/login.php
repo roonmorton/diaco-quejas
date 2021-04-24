@@ -7,6 +7,7 @@ $uUsuariro = isset($_SESSION["usuario"]) ? $_SESSION["usuario"] : null;
 
 if ((isset($uNombres) && isset($uApellidos) && isset($uUsuariro))) {
     header('Location:' . '/admin');
+    exit();
 }
 
 
